@@ -20,7 +20,7 @@ public class MunchMap extends Application {
     public void start(Stage primaryStage) throws Exception {
         try {
             createDataTable();
-            Parent root = FXMLLoader.load(getClass().getResource("login-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MunchMap.fxml"));
             Scene scene = new Scene(root, 600, 400);
             primaryStage.setScene(scene);
             primaryStage.show();
