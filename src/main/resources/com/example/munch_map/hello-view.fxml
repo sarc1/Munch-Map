@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Munch Map" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets top="20.0" />
-         </BorderPane.margin>
-         <font>
-            <Font name="Franklin Gothic Medium Cond" size="48.0" />
-         </font>
-      </Text>
-   </top>
-   <center>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="146.0" prefWidth="374.0" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="387.00001525878906" minWidth="10.0" prefWidth="284.19999427795403" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="379.0" text="Login">
-               <font>
-                  <Font name="Franklin Gothic Demi" size="30.0" />
-               </font></Button>
-            <Button mnemonicParsing="false" prefHeight="57.0" prefWidth="381.0" text="Sign Up" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Franklin Gothic Demi Cond" size="30.0" />
-               </font>
-            </Button>
-         </children>
-      </GridPane>
-   </center>
-</BorderPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" />
