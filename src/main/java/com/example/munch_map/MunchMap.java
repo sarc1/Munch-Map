@@ -1,16 +1,22 @@
 package com.example.munch_map;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MunchMap extends Application {
+
+    @FXML
+    AnchorPane LoginSignupPage;
 
     public static void main(String[] args) {
         launch(args);
@@ -45,6 +51,24 @@ public class MunchMap extends Application {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onLoginButtonClick() throws IOException {
+        AnchorPane p  = (AnchorPane) LoginSignupPage;
+        Parent scene = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        p.getScene().getStylesheets().clear();
+        p.getScene().getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        p.getChildren().clear();
+        p.getChildren().add(scene);
+    }
+
+    public void onSignUpButtonClick() throws IOException {
+        AnchorPane p  = (AnchorPane) LoginSignupPage;
+        Parent scene = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+        p.getScene().getStylesheets().clear();
+        p.getScene().getStylesheets().add(getClass().getResource("signup.css").toExternalForm());
+        p.getChildren().clear();
+        p.getChildren().add(scene);
     }
 
 }

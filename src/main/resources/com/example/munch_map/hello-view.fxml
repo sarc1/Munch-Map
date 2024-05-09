@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane fx:id="helloviewpn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.HelloController">
+   <children>
+      <Button fx:id="btnEnter" layoutX="328.0" layoutY="429.0" mnemonicParsing="false" onAction="#onEnterButtonClick" prefHeight="56.0" prefWidth="121.0" text="ENTER" textAlignment="CENTER" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="415.0">
+         <font>
+            <Font name="Consolas" size="25.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

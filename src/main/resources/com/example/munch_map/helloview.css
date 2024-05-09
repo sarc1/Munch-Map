@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Dosis:wght@200..800&display=swap');
+
+.root{
+    -fx-background-color: #DEFFE1;
+    -fx-background-image: url("https://i.pinimg.com/originals/85/7e/6b/857e6b95d37a789f89a0602ba6445793.png");
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 300 300;
+}
+.button{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}

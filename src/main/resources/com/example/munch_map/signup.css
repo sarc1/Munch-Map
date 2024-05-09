@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Dosis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Dosis:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+#SignUpPage{
+    -fx-background-color: #DEFFE1;
+}
+#btnSignUp{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 20px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+}
+
+#caption{
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-fill: #34AC90;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+#username, #email, #password{
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-fill: #156512;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+#usernameInput, #emailInput, #passwordInput{
+    -fx-background-color: #A8DFAD;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-background-radius: 25px;
+    -fx-font-weight: bold;
+}
