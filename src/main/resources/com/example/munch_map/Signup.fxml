@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="SignUpPage" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.SignupController">
+   <children>
+      <Text fx:id="caption" layoutX="76.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Let's Sign Up, Moochi.">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="username" layoutX="164.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="141.818359375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="email" layoutX="164.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="141.81835937500006">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="password" layoutX="164.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="141.81835937500006">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="usernameInput" layoutX="310.0" layoutY="164.0" prefHeight="40.0" prefWidth="307.0" />
+      <TextField fx:id="emailInput" layoutX="310.0" layoutY="232.0" prefHeight="40.0" prefWidth="307.0" />
+      <PasswordField fx:id="passwordInput" layoutX="310.0" layoutY="300.0" prefHeight="40.0" prefWidth="307.0" />
+      <Button fx:id="btnSignUp" layoutX="502.0" layoutY="359.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="40.0" prefWidth="113.0" text="Signup" />
+   </children>
+</AnchorPane>

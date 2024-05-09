@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.MunchMap">
-    <children>
-
-    </children>
+<AnchorPane fx:id="LoginSignupPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.MunchMap">
+   <children>
+      <Text fx:id="lblMunchMap" layoutX="149.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ready for MunchMap?">
+         <font>
+            <Font size="50.0" />
+         </font></Text>
+      <Button fx:id="btnLogin" layoutX="325.0" layoutY="249.0" mnemonicParsing="false" onAction="#onLoginButtonClick" prefHeight="50.0" prefWidth="150.0" text="Login">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+      <Button fx:id="btnSignup" layoutX="325.0" layoutY="334.0" mnemonicParsing="false" onAction="#onSignUpButtonClick" prefHeight="50.0" prefWidth="150.0" text="Signup">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
