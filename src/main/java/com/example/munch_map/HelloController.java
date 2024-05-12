@@ -16,6 +16,7 @@ public class HelloController {
 
     @FXML
     protected void onEnterButtonClick() throws IOException {
+        TableInstantiation.initializeTables();
         AnchorPane p  = (AnchorPane) helloviewpn;
         Parent scene = FXMLLoader.load(getClass().getResource("MunchMap.fxml"));
         p.getScene().getStylesheets().clear();
