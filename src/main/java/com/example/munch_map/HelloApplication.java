@@ -12,6 +12,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        TableInstantiation.initializeTables();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 550);
 //        AnchorPane root = new AnchorPane();
@@ -20,7 +21,7 @@ public class HelloApplication extends Application {
 //        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("resources/images/logo.png")));
         stage.setTitle("Munch Map");
         stage.setScene(scene);
-        stage. setResizable(false);
+        stage.setResizable(false);
         stage.show();
     }
 
