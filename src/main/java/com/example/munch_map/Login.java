@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LoginController {
+public class Login {
     TextField useremailInput;
     PasswordField passwordInput;
     AnchorPane LoginPage;

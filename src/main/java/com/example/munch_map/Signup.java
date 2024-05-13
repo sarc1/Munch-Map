@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SignupController {
+public class Signup {
     Text caption;
     TextField usernameInput, emailInput;
     PasswordField passwordInput;
