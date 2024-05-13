@@ -8,7 +8,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
-public class HelloController {
+public class Start {
     @FXML
     private Label welcomeText;
     @FXML
