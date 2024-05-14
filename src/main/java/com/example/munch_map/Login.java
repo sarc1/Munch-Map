@@ -1,7 +1,9 @@
 package com.example.munch_map;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -13,8 +15,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Login {
+    public Button btnLogin;
+    @FXML
     TextField useremailInput;
+    @FXML
     PasswordField passwordInput;
+    @FXML
     AnchorPane LoginPage;
 
     static int currentUser;
@@ -32,7 +38,7 @@ public class Login {
                     currentUser = list.getInt("acc_id");
                     AnchorPane p = LoginPage;
                     // TOD0: Link to MunchMap Main Page and CSS
-                    Parent scene = FXMLLoader.load(getClass().getResource("MunchMap.fxml"));
+                    Parent scene = FXMLLoader.load(getClass().getResource("Barangay.fxml"));
                     p.getScene().getStylesheets().clear();
                     p.getScene().getStylesheets().add(getClass().getResource("munchmap.css").toExternalForm());
                     p.getChildren().clear();

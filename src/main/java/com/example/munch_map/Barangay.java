@@ -1,23 +1,46 @@
 package com.example.munch_map;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.AnchorPane;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Barangay {
 
-    // Pushing for rename, until now I don't understand ngano ni ang fxml haha -rei
-    @FXML
-    private ComboBox<String> comboBox;
+    public AnchorPane barangayAnchorPane;
+    public ComboBox<String> barangayComboBox;
 
-    @FXML
-    private void onComboBoxAction(ActionEvent event) {
-        String selectedItem = comboBox.getSelectionModel().getSelectedItem();
-        // Handle the selected item
-    }
+    public void initialize() {
+        Task<ObservableList<String>> task = new Task<>() {
+            @Override
+            public ObservableList<String> call() throws Exception {
 
-    @FXML
-    private void openNewWindow(ActionEvent event) {
-        // Logic to open new window
+                ObservableList<String> barangays = FXCollections.observableArrayList();
+
+                try (Connection c = MySQLConnection.getConnection();
+                     Statement statement = c.createStatement()) {
+
+                    String query = "SELECT * FROM tblBarangay;";
+                    ResultSet list = statement.executeQuery(query);
+
+                    while(list.next()) {
+                        String name = list.getString("barangay_name");
+                        barangays.add(name);
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+                return barangays;
+            }
+        };
+        task.setOnSucceeded(e -> barangayComboBox.setItems(task.getValue()));
+        new Thread(task).start();
     }
 }
