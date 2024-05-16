@@ -3,22 +3,20 @@ package com.example.munch_map;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class StartApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         TableInstantiation.initializeTables();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(StartApp.class.getResource("start-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 550);
 //        AnchorPane root = new AnchorPane();
 //        root.setId("pane");
-        scene.getStylesheets().add(getClass().getResource("helloview.css").toExternalForm());
-//        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("resources/images/logo.png")));
+        scene.getStylesheets().add(getClass().getResource("startview.css").toExternalForm());
+//        stage.getIcons().add(new Image(StartApp.class.getResourceAsStream("resources/images/logo.png")));
         stage.setTitle("Munch Map");
         stage.setScene(scene);
         stage.setResizable(false);

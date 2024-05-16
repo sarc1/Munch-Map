@@ -1,7 +1,9 @@
 package com.example.munch_map;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -13,10 +15,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SignupController {
+public class Signup {
+    public Button btnSignUp;
+    @FXML
     Text caption;
+    @FXML
     TextField usernameInput, emailInput;
+    @FXML
     PasswordField passwordInput;
+    @FXML
     AnchorPane SignUpPage;
 
     public void onSignUpButtonClick() throws IOException {
