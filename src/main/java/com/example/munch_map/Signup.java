@@ -27,7 +27,7 @@ public class Signup {
     AnchorPane SignUpPage;
 
     public void onSignUpButtonClick() throws IOException {
-        try (Connection c = MySQLConnection.getConnection();
+        try (Connection c = MySQLConnection.ds.getConnection();
              PreparedStatement statement = c.prepareStatement(
                      "INSERT INTO tblAccount (username, email, password) VALUES (?, ?, ?)"
              )) {

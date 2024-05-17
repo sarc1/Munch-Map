@@ -22,7 +22,7 @@ public class Barangay {
 
                 ObservableList<String> barangays = FXCollections.observableArrayList();
 
-                try (Connection c = MySQLConnection.getConnection();
+                try (Connection c = MySQLConnection.ds.getConnection();
                      Statement statement = c.createStatement()) {
 
                     String query = "SELECT * FROM tblBarangay;";

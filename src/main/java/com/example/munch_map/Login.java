@@ -25,7 +25,7 @@ public class Login {
 
     static int currentUser;
     public void onLoginButtonClick() throws IOException {
-        try (Connection c = MySQLConnection.getConnection();
+        try (Connection c = MySQLConnection.ds.getConnection();
              Statement statement = c.createStatement()) {
 
             String query = "SELECT * FROM tblAccount";
