@@ -54,13 +54,14 @@ public class Barangay {
         new Thread(task).start();
     }
 
+    // REI & KIYO: Temporary implementation of button, will attempt ComboBox onClick implementation soon.
     public void goToBarangay(ActionEvent actionEvent) throws IOException {
         selectedBarangay = barangayComboBox.getSelectionModel().getSelectedItem();
         AnchorPane p = barangayPage;
-        // TOD0: Link to MunchMap Main Page and CSS
         Parent scene = FXMLLoader.load(getClass().getResource("view_places.fxml"));
         p.getScene().getStylesheets().clear();
 //        p.getScene().getStylesheets().add(getClass().getResource("munchmap.css").toExternalForm());
+        // TOD0: Change with actual css of Places Page
         p.getChildren().clear();
         p.getChildren().add(scene);
     }
