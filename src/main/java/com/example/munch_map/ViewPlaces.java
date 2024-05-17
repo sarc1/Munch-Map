@@ -32,8 +32,6 @@ public class ViewPlaces {
     class FetchPlacesTask extends Task<ObservableList<String>> {
         @Override
         protected ObservableList<String> call() {
-            ObservableList<String> places = FXCollections.observableArrayList();
-
             try (Connection c = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = c.prepareStatement(
                          "SELECT p.place_id, p.place_name " +
