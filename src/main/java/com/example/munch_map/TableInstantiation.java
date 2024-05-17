@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class TableInstantiation {
     public static void initializeTables() {
 
-        try (Connection c = MySQLConnection.getConnection();
+        try (Connection c = MySQLConnection.ds.getConnection();
              Statement statement = c.createStatement()) {
 
             // Table Queries
