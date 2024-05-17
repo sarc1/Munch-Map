@@ -19,12 +19,21 @@ public class TableInstantiation {
                     "password VARCHAR(100) NOT NULL)";
 
             String createBarangayTableQuery = "CREATE TABLE IF NOT EXISTS tblBarangay(" +
-                    "barangay_name VARCHAR(100) NOT NULL PRIMARY KEY)";
+                    "barangay_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+                    "barangay_name VARCHAR(255) NOT NULL UNIQUE)";
+
+            String createPlaceTableQuery = "CREATE TABLE IF NOT EXISTS tblPlace (" +
+                    "place_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+                    "barangay_id INT(10) NOT NULL, " +
+                    "place_name VARCHAR(255) NOT NULL, " +
+                    "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE)";
+
             //TOD0: insert Location into tblBarangay (Coordinates)
 
             // Query Executions
             statement.execute(createAccountTableQuery);
             statement.execute(createBarangayTableQuery);
+            statement.execute(createPlaceTableQuery);
 
         } catch (SQLException e) {
             e.printStackTrace();
