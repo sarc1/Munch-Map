@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Signup {
     public Button btnSignUp;
@@ -49,9 +50,9 @@ public class Signup {
                 statement.executeUpdate();
 
                 AnchorPane p = SignUpPage;
-                Parent scene = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
                 p.getScene().getStylesheets().clear();
-                p.getScene().getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+                p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("login.css")).toExternalForm());
                 p.getChildren().clear();
                 p.getChildren().add(scene);
             }

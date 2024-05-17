@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class Login {
     public Button btnLogin;
@@ -38,9 +39,9 @@ public class Login {
                     currentUser = list.getInt("acc_id");
                     AnchorPane p = LoginPage;
                     // TOD0: Link to MunchMap Main Page and CSS
-                    Parent scene = FXMLLoader.load(getClass().getResource("Barangay.fxml"));
+                    Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
                     p.getScene().getStylesheets().clear();
-                    p.getScene().getStylesheets().add(getClass().getResource("munchmap.css").toExternalForm());
+                    p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("munchmap.css")).toExternalForm());
                     p.getChildren().clear();
                     p.getChildren().add(scene);
                 }
