@@ -24,8 +24,6 @@ public class MySQLConnection {
     public static Connection getConnection() {
         Connection c = null;
         try {
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            c = DriverManager.getConnection(URL, USERNAME, PASSWORD)
             c = ds.getConnection();
         } catch (SQLException e) {
             e.printStackTrace();

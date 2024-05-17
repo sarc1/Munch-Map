@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.util.Objects;
 
 public class MunchMap {
 
@@ -13,18 +14,18 @@ public class MunchMap {
 
     public void onLoginButtonClick() throws IOException {
         AnchorPane p  = (AnchorPane) LoginSignupPage;
-        Parent scene = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
         p.getScene().getStylesheets().clear();
-        p.getScene().getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+        p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("login.css")).toExternalForm());
         p.getChildren().clear();
         p.getChildren().add(scene);
     }
 
     public void onSignUpButtonClick() throws IOException {
         AnchorPane p  = (AnchorPane) LoginSignupPage;
-        Parent scene = FXMLLoader.load(getClass().getResource("Signup.fxml"));
+        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Signup.fxml")));
         p.getScene().getStylesheets().clear();
-        p.getScene().getStylesheets().add(getClass().getResource("signup.css").toExternalForm());
+        p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("signup.css")).toExternalForm());
         p.getChildren().clear();
         p.getChildren().add(scene);
     }

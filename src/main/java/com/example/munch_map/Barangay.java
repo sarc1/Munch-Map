@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
@@ -16,9 +15,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 
 public class Barangay {
-
     public AnchorPane barangayPage;
     public ComboBox<String> barangayComboBox;
     public static String selectedBarangay;
@@ -59,7 +58,7 @@ public class Barangay {
                 try {
                     selectedBarangay = barangayComboBox.getSelectionModel().getSelectedItem();
                     AnchorPane p = barangayPage;
-                    Parent scene = FXMLLoader.load(getClass().getResource("view_places.fxml"));
+                    Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view_places.fxml")));
                     p.getScene().getStylesheets().clear();
 //        p.getScene().getStylesheets().add(getClass().getResource("munchmap.css").toExternalForm());
                     // TOD0: Change with actual css of Places Page

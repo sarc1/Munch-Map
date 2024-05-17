@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartApp extends Application {
     @Override
@@ -15,7 +16,7 @@ public class StartApp extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 800, 550);
 //        AnchorPane root = new AnchorPane();
 //        root.setId("pane");
-        scene.getStylesheets().add(getClass().getResource("startview.css").toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("startview.css")).toExternalForm());
 //        stage.getIcons().add(new Image(StartApp.class.getResourceAsStream("resources/images/logo.png")));
         stage.setTitle("Munch Map");
         stage.setScene(scene);
