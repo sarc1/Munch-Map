@@ -53,7 +53,7 @@ public class Barangay {
         new Thread(task).start();
 
         // FIX: Improved implementation of Barangay Selection
-        barangayComboBox.setOnAction(new EventHandler<ActionEvent>() {
+        barangayComboBox.setOnAction(new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
@@ -61,8 +61,7 @@ public class Barangay {
                     AnchorPane p = barangayPage;
                     Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view_places.fxml")));
                     p.getScene().getStylesheets().clear();
-                    p.getScene().getStylesheets().add(getClass().getResource("view_places.css").toExternalForm());
-                    // TOD0: Change with actual css of Places Page
+                    p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("view_places.css")).toExternalForm());
                     p.getChildren().clear();
                     p.getChildren().add(scene);
                 } catch (IOException e) {

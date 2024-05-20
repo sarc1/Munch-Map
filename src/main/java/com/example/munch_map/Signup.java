@@ -28,11 +28,11 @@ public class Signup {
     @FXML
     AnchorPane SignUpPage;
 
-    public void onSignUpButtonClick() throws IOException {
+    public void onSignUpButtonClick() {
 
         Task<Void> task = new Task<>() {
             @Override
-            protected Void call() throws Exception {
+            protected Void call() {
                 try (Connection c = MySQLConnection.ds.getConnection();
                      PreparedStatement statement = c.prepareStatement(
                              "INSERT INTO tblAccount (username, email, password) VALUES (?, ?, ?)"
@@ -64,7 +64,7 @@ public class Signup {
         task.setOnSucceeded(event -> {
             try {
                 AnchorPane p = SignUpPage;
-                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
                 p.getScene().getStylesheets().clear();
                 p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("login.css")).toExternalForm());
                 p.getChildren().clear();

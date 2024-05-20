@@ -18,7 +18,7 @@ public class Start {
     @FXML
     protected void onEnterButtonClick() throws IOException {
         TableInstantiation.initializeTables();
-        AnchorPane p  = (AnchorPane) helloviewpn;
+        AnchorPane p  = helloviewpn;
         Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MunchMap.fxml")));
         p.getScene().getStylesheets().clear();
         p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("munchmap.css")).toExternalForm());
