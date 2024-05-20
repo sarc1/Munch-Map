@@ -52,7 +52,7 @@ public class ViewPlaces {
     }
 
     private Task<String> getPlaceRatingFromDBTask(String placeName) {
-        return new Task<String>() {
+        return new Task<>() {
             @Override
             public String call() {
                 try (Connection c = MySQLConnection.ds.getConnection();
@@ -79,7 +79,7 @@ public class ViewPlaces {
     }
 
     private Task<String> getPlaceTypeFromDBTask(String placeName) {
-        return new Task<String>() {
+        return new Task<>() {
             @Override
             public String call() {
                 try (Connection c = MySQLConnection.ds.getConnection();
