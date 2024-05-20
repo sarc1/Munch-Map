@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="barangayAnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.Barangay">
+<AnchorPane fx:id="barangayPage" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.Barangay">
     <children>
         <ComboBox fx:id="barangayComboBox" layoutX="325.0" layoutY="262.0" prefWidth="150.0" />
     </children>

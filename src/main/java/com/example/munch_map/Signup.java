@@ -1,5 +1,6 @@
 package com.example.munch_map;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class Signup {
     public Button btnSignUp;
@@ -27,37 +29,50 @@ public class Signup {
     AnchorPane SignUpPage;
 
     public void onSignUpButtonClick() throws IOException {
-        try (Connection c = MySQLConnection.getConnection();
-             PreparedStatement statement = c.prepareStatement(
-                     "INSERT INTO tblAccount (username, email, password) VALUES (?, ?, ?)"
-             )) {
 
-            PreparedStatement checker = c.prepareStatement("SELECT * FROM tblAccount WHERE username = ? OR email = ?");
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                try (Connection c = MySQLConnection.ds.getConnection();
+                     PreparedStatement statement = c.prepareStatement(
+                             "INSERT INTO tblAccount (username, email, password) VALUES (?, ?, ?)"
+                     )) {
 
-            checker.setString(1, usernameInput.getText());
-            checker.setString(2, emailInput.getText());
+                    PreparedStatement checker = c.prepareStatement("SELECT * FROM tblAccount WHERE username = ? OR email = ?");
 
-            ResultSet list = checker.executeQuery();
+                    checker.setString(1, usernameInput.getText());
+                    checker.setString(2, emailInput.getText());
 
-            if(list.next()) {
-                // TOD0: Implement Error Message
-                System.out.println("Username or Email already exists");
-            } else {
-                statement.setString(1, usernameInput.getText());
-                statement.setString(2, emailInput.getText());
-                statement.setString(3, passwordInput.getText());
-                statement.executeUpdate();
+                    ResultSet list = checker.executeQuery();
 
+                    if(list.next()) {
+                        // TOD0: Implement Error Message
+                        System.out.println("Username or Email already exists");
+                    } else {
+                        statement.setString(1, usernameInput.getText());
+                        statement.setString(2, emailInput.getText());
+                        statement.setString(3, passwordInput.getText());
+                        statement.executeUpdate();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        task.setOnSucceeded(event -> {
+            try {
                 AnchorPane p = SignUpPage;
-                Parent scene = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
                 p.getScene().getStylesheets().clear();
-                p.getScene().getStylesheets().add(getClass().getResource("login.css").toExternalForm());
+                p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("login.css")).toExternalForm());
                 p.getChildren().clear();
                 p.getChildren().add(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        });
+        new Thread(task).start();
     }
 }

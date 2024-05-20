@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Start {
     @FXML
@@ -18,9 +19,9 @@ public class Start {
     protected void onEnterButtonClick() throws IOException {
         TableInstantiation.initializeTables();
         AnchorPane p  = (AnchorPane) helloviewpn;
-        Parent scene = FXMLLoader.load(getClass().getResource("MunchMap.fxml"));
+        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MunchMap.fxml")));
         p.getScene().getStylesheets().clear();
-        p.getScene().getStylesheets().add(getClass().getResource("munchmap.css").toExternalForm());
+        p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("munchmap.css")).toExternalForm());
         p.getChildren().clear();
         p.getChildren().add(scene);
     }
