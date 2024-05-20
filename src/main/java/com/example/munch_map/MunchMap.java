@@ -13,8 +13,8 @@ public class MunchMap {
     AnchorPane LoginSignupPage;
 
     public void onLoginButtonClick() throws IOException {
-        AnchorPane p  = (AnchorPane) LoginSignupPage;
-        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Login.fxml")));
+        AnchorPane p  = LoginSignupPage;
+        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
         p.getScene().getStylesheets().clear();
         p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("login.css")).toExternalForm());
         p.getChildren().clear();
@@ -22,8 +22,8 @@ public class MunchMap {
     }
 
     public void onSignUpButtonClick() throws IOException {
-        AnchorPane p  = (AnchorPane) LoginSignupPage;
-        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Signup.fxml")));
+        AnchorPane p  = LoginSignupPage;
+        Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("signup.fxml")));
         p.getScene().getStylesheets().clear();
         p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("signup.css")).toExternalForm());
         p.getChildren().clear();
