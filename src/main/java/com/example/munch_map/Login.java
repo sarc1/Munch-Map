@@ -57,7 +57,7 @@ public class Login {
                 // TOD0: Link to MunchMap Main Page and CSS
                 Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
                 p.getScene().getStylesheets().clear();
-                p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("munchmap.css")).toExternalForm());
+                p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
                 p.getChildren().clear();
                 p.getChildren().add(scene);
             } catch (IOException e) {
