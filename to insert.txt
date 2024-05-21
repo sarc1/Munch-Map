@@ -1,0 +1,288 @@
+String createAccountTableQuery = "CREATE TABLE IF NOT EXISTS tblAccount(" +
+    "acc_id INT AUTO_INCREMENT PRIMARY KEY," +
+    "username VARCHAR(100) NOT NULL," +
+    "email VARCHAR(100) NOT NULL," +
+    "password VARCHAR(100) NOT NULL)";
+
+String createBarangayTableQuery = "CREATE TABLE IF NOT EXISTS tblBarangay(" +
+    "barangay_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+    "barangay_name VARCHAR(255) NOT NULL UNIQUE)";
+
+// TODO: insert Location into tblBarangay (Coordinates) for GMaps implementation
+
+String createPlaceTableQuery = "CREATE TABLE IF NOT EXISTS tblPlace (" +
+    "place_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+    "barangay_id INT(10) NOT NULL, " +
+    "place_name VARCHAR(255) NOT NULL, " +
+    "place_type VARCHAR(255) NOT NULL," +
+    "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE)";
+
+String createReviewTableQuery = "CREATE TABLE IF NOT EXISTS tblReviews (" +
+    "review_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+    "place_id INT(10) NOT NULL," +
+    "acc_id INT NOT NULL," +
+    "rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0.0 AND rating <= 5.0)," +
+    "comment VARCHAR(255)," +
+    "FOREIGN KEY (place_id) REFERENCES tblPlace(place_id) ON DELETE CASCADE," +
+    "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
+    "isApproved TINYINT(1) NOT NULL DEFAULT 0)";
+
+-- tblAccount
+INSERT INTO tblBarangay (barangay_name) VALUES ('Labangon');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Tisa');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Guadalupe');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Duljo');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Mambaling');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Punta Princesa');
+INSERT INTO tblBarangay (barangay_name) VALUES ('Capitol Site');
+
+-- tblBarangay
+-- Labangon
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delish Cafe', 'Cafe');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Black and White Coffee Shop', 'Cafe');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Siomai Master', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Tatay Sisigan', 'Sisig');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Tuslob Buwa sa Labangon', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Kuya Simo's Larangan', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Hans Pex Food Parlor', 'Asian Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delchiz', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Papay Baldo’s Grill', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Food Trip Section', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Su-Khe', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Jayvin's BBQ', 'Soup Kitchen');
+
+-- Tisa
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Siomai sa Tisa', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Pater sa Tisa', 'Halal restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'PAPSY'S BBQ - Tisa', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Sofia', 'Punok-Punok');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'May Abohan', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Kuya Jeff's Siomayan D' Original SIOMAI SA TISA', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Braddex', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Way Tugpahay Siomai Sa Tisa', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Kuya Jeff's Siomayan', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'El Inaya Gourmet-Tisa', 'Halal restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Silogan Sa Tisa', 'Breakfast Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'KRAB Seafood Restaurant', 'Seafood Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'I Love Bucket Shrimps - CUBE Tisa', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Halang Halang Sa Tisa', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'The Good Burger', 'Hamburger Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Monbi's Halo Halo', 'Dessert restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Sol's Halo Halo and Desserts', 'Dessert Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Narnia Tuslob Buwa', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Melton's Halo-Halo', 'Dessert Restaurant');
+
+-- Guadalupe
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kuzina Guadalupe', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Mr. Dagupeño - Guadalupe, Cebu', 'Takeout Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Takeout Restaurant', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Rodeo Grill Guadalupe', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Legaya's Eatery', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'D' Original Lamaw sa Guadalupe', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sizzling Garden', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Frian's Cafe', 'Cafe');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kusina ni Nasing', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sigmaw sa Guadalupe', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Ann's Ngohiong by Doming's', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'JuanLaagan Special BBQ + Ngohiong - Guadalupe', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Jollibee', 'FastFood');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Ned Nanay's Grill', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Lola Eats', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Silogan Ni Gian', 'Breakfast Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Smoke Stack', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Chowking', 'FastFood');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'McDonald's', 'FastFood');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'AA BBQ Main', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kantin pork steak and pork ribs (guada branch)', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Eastern Hub Restaurant', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sizzling Garden', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'G. Street', 'Barbecue Restaurant');
+
+-- Duljo
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Padilla Carenderia Eatery', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'D' Lucky Corner', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'One Big Eat Carinderia', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Amatullah Food Shop', 'Takeout Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Beef Pares ni RagDex', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Julie's Bakeshop', 'Bakery');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'JAYDEE'S SILOGAN', 'Breakfast Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Frina's Lechon', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Loy's Tuslob Buwa - Duljo', 'Restaurant');
+
+-- Mambaling
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Max’s Restaurant', 'Chicken Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Zubuchon', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Patty Pie', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'RACKS SM Seaside Cebu', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Yayoi Japanese Teishoku Restaurant', 'Japanese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Bigby's Cafe & Restaurant', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Lechoneria SM Seaside Cebu', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Tong Yang - SM Seaside City Cebu', 'Buffet Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Café Laguna - SM Seaside', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Kuya J', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Hukad', 'Filipino	 Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Cabalen', 'Buffet Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Choobi Choobi', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Casa Verde', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Tim Ho Wan', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Ribshack', 'Unli-Rice Restaurant');
+
+-- Punta Princesa
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Alberto's Pizza Punta Princesa', 'Pizza Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Kusina sa Ganciang Eatery', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Salie’s Craving', 'Pizza Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Paeng’s Chicken - Punta Princesa', 'Barbecue');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Jean's Kandingan Carenderia', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Sio Mai Wey', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Ian-Inzo Eatery', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Ngohiong Express - Punta', 'FastFood');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Penny's Carenderia', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Nippy's Food House', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Mers Paluto', 'Cafeteria');
+
+-- Capitol Site
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Carlo's Batchoy', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Raul's Restaurant', 'Soup Kitchen');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, Beef Pares sa Capitol', 'Filipino Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Han-nya Japanese Restaurant', 'Japanese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Manila Foodshoppe', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Cecilia's Kitchen', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Capitol Site Eatery', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Phát Phố', 'Vietnamese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Pearl Meat Shop', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Why Chicken Cebu Capitol', 'Chicken Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Ala King', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Mr. Crab Capitol', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Chinita Eatery', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Mommy Auring's Lechon Cebu', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Times Kitchen', 'Chinese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Abiyo Uno', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Red Bowl', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Ned Nanay's Grill', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Suki-Desu', 'Japanese Restaurant');
+
+-- tblReviews
+-- Labangon
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1, 1, 4.0, 'Lovely place, enjoyed the serene atmosphere.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (2, 1, 3.8, 'Great location, thanks for the wonderful hospitality!', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (3, 1, 4.4, 'Amazing views and comfortable stay.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (4, 1, 4.1, 'Fantastic place, I loved every minute of my stay.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (5, 1, 3.9, 'Charming place with exceptional service.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (6, 1, 4.3, 'Excellent amenities and very clean.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (7, 1, 4.2, 'Calm and peaceful with a helpful staff.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (8, 1, 4.5, 'Absolutely fantastic, great place to relax.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (9, 1, 4.4, 'Very cozy and comfortable, will definitely visit again.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (10, 1, 4.0, 'Had an amazing time, will highly recommend.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (11, 1, 4.5, 'Great overall experience, loved the decor and ambiance.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (12, 1, 4.6, 'An excellent place to unwind and relax. Top-notch service!', 1);
+-- Tisa
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (13, 2, 4.5, 'Delicious food and quick service.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (14, 2, 3.9, 'Cozy atmosphere and tasty meals.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (15, 2, 4.4, 'Loved the dessert menu.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (16, 2, 4.3, 'The staff was very friendly and attentive.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (17, 2, 4.0, 'Impressive selection of drinks.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (18, 2, 4.2, 'The pasta was cooked to perfection.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (19, 2, 3.8, 'Enjoyed their healthy salad options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (20, 2, 4.5, 'The outdoor seating was a great experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (21, 2, 4.3, 'Perfect spot for a evening dinner date.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (22, 2, 4.1, 'Their breakfast menu is amazing.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (23, 2, 4.4, 'Extensive wine list.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (24, 2, 4.2, 'Authentic recipes and charming decor.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (25, 2, 4.0, 'Vegetarian-friendly. Loved their plant-based options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (26, 2, 4.5, 'Unique gourmet dishes, a truly fantastic culinary experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (27, 2, 3.9, 'Incredible sushi selection.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (28, 2, 4.1, 'Quick takeout service and friendly staff.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (29, 2, 4.3, 'Cheerful ambiance and perfect for family dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (30, 2, 4.4, 'Their homemade bread is to die for.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (31, 2, 4.0, 'Excellent coffee and pastries.', 1);
+-- Guadalupe
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (32, 1, 4.8, 'A wonderful place to reflect and pray.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (33, 2, 4.7, 'A peaceful retreat in the city.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (34, 3, 4.9, 'Serene and calming atmosphere.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (35, 4, 4.6, 'Beautiful and spiritual place.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (36, 5, 4.8, 'Great place for meditation.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (37, 6, 4.9, 'Highly recommended for a quiet visit.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (38, 7, 4.7, 'A hidden gem in the city.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (39, 8, 4.8, 'Tranquil and inspiring.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (40, 9, 4.9, 'Perfect for a peaceful retreat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (41, 10, 4.6, 'Very spiritual and serene.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (42, 11, 4.7, 'Beautiful surroundings and very peaceful.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (43, 12, 4.9, 'Ideal place for spiritual renewal.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (44, 13, 4.6, 'Very serene and inspiring.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (45, 14, 4.8, 'Great place for quiet reflection.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (46, 15, 4.9, 'Absolutely peaceful and beautiful.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (47, 16, 4.7, 'A calm and spiritual haven.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (48, 17, 4.8, 'A wonderful place for inner peace.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (49, 18, 4.9, 'Highly peaceful and inspiring.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (50, 19, 4.6, 'Very serene and peaceful.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (51, 20, 4.7, 'A must-visit for spiritual seekers.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (52, 21, 4.9, 'A very spiritual and tranquil place.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (53, 22, 4.6, 'Highly recommended for a quiet retreat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (54, 23, 4.8, 'A peaceful and beautiful sanctuary.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (55, 24, 4.9, 'Very calming and inspiring.', 1);
+
+-- Duljo
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (56, 3, 4.2, 'Fantastic variety of shops.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (57, 4, 4.3, 'Great place to find unique items.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (58, 5, 4.1, 'A bit crowded but worth it.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (59, 6, 4.2, 'Lovely atmosphere and great shops.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (60, 7, 4.3, 'Excellent shopping experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (61, 8, 4.1, 'Good selection of stores.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (62, 9, 4.2, 'Perfect place for shopping.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (63, 10, 4.3, 'Wide range of products available.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (64, 11, 4.1, 'A great spot for some retail therapy.', 1);
+
+-- Mambaling
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (65, 2, 4.0, 'Good variety of dining options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (66, 3, 4.1, 'Nice mix of shops and restaurants.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (67, 4, 4.0, 'Convenient and diverse dining choices.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (68, 5, 4.2, 'Great place for a family outing.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (69, 6, 4.0, 'Nice place for casual dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (70, 7, 4.1, 'Good food and shopping experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (71, 8, 4.2, 'Enjoyed the dining options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (72, 9, 4.0, 'Perfect for a quick bite and shopping.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (73, 10, 4.1, 'A must-visit for food lovers.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (74, 11, 4.2, 'Great for dining and casual shopping.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (75, 12, 4.0, 'Good selection of eateries.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (76, 13, 4.1, 'Nice ambiance for dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (77, 14, 4.2, 'Enjoyed the shopping and dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (78, 15, 4.0, 'A good place to relax and eat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (79, 16, 4.1, 'Perfect spot for food and shopping.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (80, 17, 4.2, 'Great variety of food and shops.', 1);
+
+-- Punta Princesa
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (81, 2, 4.0, 'Nice place to hang out and eat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (82, 3, 4.1, 'Good selection of restaurants.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (83, 4, 4.0, 'Enjoyed the shopping experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (84, 5, 4.2, 'Great place for dining and shopping.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (85, 6, 4.0, 'Convenient location and good food.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (86, 7, 4.1, 'Nice mix of shops and eateries.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (87, 8, 4.2, 'Loved the dining options here.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (88, 9, 4.0, 'A great spot for shopping and eating.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (89, 10, 4.1, 'Highly recommended for a day out.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (90, 11, 4.2, 'Perfect for a family day out.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (91, 12, 4.0, 'Enjoyed the food and shops.', 1);
+
+-- Capitol Site
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (92, 2, 4.0, 'A great place for casual dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (93, 3, 4.1, 'Good food and pleasant ambiance.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (94, 4, 4.0, 'Nice spot for a quick meal.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (95, 5, 4.2, 'Enjoyed the dining experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (96, 6, 4.0, 'Good selection of restaurants and cafes.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (97, 7, 4.1, 'Nice place to relax and eat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (98, 8, 4.2, 'Great for a casual dining experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (99, 9, 4.0, 'Highly recommended for food lovers.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (100, 10, 4.1, 'Loved the variety of food options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (101, 11, 4.2, 'Perfect for a dining and shopping trip.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (102, 12, 4.0, 'Good food and friendly service.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (103, 13, 4.1, 'Great place to unwind and eat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (104, 14, 4.2, 'Nice ambiance and good food.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (105, 15, 4.0, 'Enjoyed the dining experience here.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (106, 16, 4.1, 'Great place to dine with friends.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (107, 17, 4.2, 'Highly recommended for a nice meal.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (108, 18, 4.0, 'Good food and nice ambiance.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (109, 19, 4.1, 'Loved the food and atmosphere.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (110, 20, 4.2, 'Great place to eat and shop.', 1);
+
+
+
