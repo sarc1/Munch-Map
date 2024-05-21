@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Dosis:wght@200..800&display=swap');
+
+#transitionPage {
+    -fx-background-color: #DEFFE1;
+}
+
+#phrase, #title {
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-fill: #34AC90;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}

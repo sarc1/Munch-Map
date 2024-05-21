@@ -21,8 +21,6 @@ public class TableInstantiation {
                     "barangay_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
                     "barangay_name VARCHAR(255) NOT NULL UNIQUE)";
 
-            //TOD0: insert Location into tblBarangay (Coordinates) for GMaps implementation
-
             String createPlaceTableQuery = "CREATE TABLE IF NOT EXISTS tblPlace (" +
                     "place_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
                     "barangay_id INT(10) NOT NULL, " +
