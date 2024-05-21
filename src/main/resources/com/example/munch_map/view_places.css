@@ -10,7 +10,54 @@
     -fx-font-size: 40px;
     -fx-font-weight: bold;
 }
+#barangay{
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-fill: #34AC90;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
 
 #placeListView{
+    -fx-background-color: #2EE6FF;
+    -fx-background-radius: 10;
+    -fx-padding: 5;
+}
+.list-cell{
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+}
 
+#hboxPlaceDetails{
+    -fx-background-color: #4EE5C2;
+}
+
+#placeName{
+
+}
+
+#placeType{}
+#btnDetails{
+    -fx-background-color: #FFFFFF;
+    -fx-corner-color: #000000;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+#btnMenu{
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+#btnReviews{
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
 }
