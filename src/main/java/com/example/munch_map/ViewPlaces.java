@@ -3,8 +3,11 @@ package com.example.munch_map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.Connection;
@@ -14,7 +17,8 @@ import java.sql.SQLException;
 
 public class ViewPlaces {
 
-    public AnchorPane viewPlacesAnchorPane;
+    public AnchorPane viewPlacesAnchorPane, showAnchor;
+    public ScrollPane showScroll;
     public ListView<String> placeListView;
     public Label barangayNameLabel;
     public ObservableList<String> places;
@@ -22,6 +26,9 @@ public class ViewPlaces {
     public Label placeName;
     public Label placeRating;
     public Label placeType;
+    public Button btnDetails;
+    public Button btnMenu;
+    public Button btnReviews;
 
     public void initialize() {
         barangayNameLabel.setText(Barangay.selectedBarangay);
@@ -104,6 +111,15 @@ public class ViewPlaces {
         };
     }
 
+    public void detailOnClick(ActionEvent actionEvent) {
+    }
+
+    public void menuOnClick(ActionEvent actionEvent) {
+    }
+
+    public void reviewsOnClick(ActionEvent actionEvent) {
+    }
+
     private class FetchPlacesTask extends Task<ObservableList<String>> {
         @Override
         protected ObservableList<String> call() {
@@ -129,4 +145,6 @@ public class ViewPlaces {
             return places;
         }
     }
+
+
 }
