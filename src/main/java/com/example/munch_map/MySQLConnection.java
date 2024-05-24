@@ -2,7 +2,6 @@ package com.example.munch_map;
 
 import com.zaxxer.hikari.*;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConnection {

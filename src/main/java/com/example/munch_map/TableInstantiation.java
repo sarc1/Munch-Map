@@ -15,7 +15,8 @@ public class TableInstantiation {
                     "acc_id INT AUTO_INCREMENT PRIMARY KEY," +
                     "username VARCHAR(100) NOT NULL," +
                     "email VARCHAR(100) NOT NULL," +
-                    "password VARCHAR(100) NOT NULL)";
+                    "password VARCHAR(100) NOT NULL," +
+                    "admin_status TINYINT(1) NOT NULL DEFAULT 0)";
 
             String createBarangayTableQuery = "CREATE TABLE IF NOT EXISTS tblBarangay(" +
                     "barangay_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +

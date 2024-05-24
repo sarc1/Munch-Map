@@ -25,7 +25,9 @@ public class Login {
     @FXML
     AnchorPane LoginPage;
 
-    static int currentUser;
+    static User activeUser;
+    static Admin activeAdmin;
+
     public void onLoginButtonClick() throws IOException {
         Task<Void> task = new Task<>() {
             @Override
@@ -40,7 +42,11 @@ public class Login {
                         if ((useremailInput.getText().equals(list.getString("username")) ||
                                 useremailInput.getText().equals(list.getString("email"))) &&
                                 passwordInput.getText().equals(list.getString("password"))) {
-                            currentUser = list.getInt("acc_id");
+                            if (list.getBoolean("admin_status")) {
+                                activeAdmin = new Admin(list.getString("username"), list.getString("email"), true);
+                            } else {
+                                activeUser = new User(list.getString("username"), list.getString("email"), true);
+                            }
                         }
                     }
                     // TOD0: Add error message
