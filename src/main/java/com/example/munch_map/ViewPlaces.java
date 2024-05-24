@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -30,6 +31,9 @@ public class ViewPlaces {
     public Button btnMenu;
     public Button btnReviews;
 
+    private String selectedPlaceName;
+
+
     public void initialize() {
         barangayNameLabel.setText(Barangay.selectedBarangay);
         places = FXCollections.observableArrayList();
@@ -39,6 +43,7 @@ public class ViewPlaces {
 
         placeListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
+                selectedPlaceName = newValue;
                 updatePlaceDetails(newValue);
             }
         });
@@ -118,6 +123,11 @@ public class ViewPlaces {
     }
 
     public void reviewsOnClick(ActionEvent actionEvent) {
+        if (selectedPlaceName != null) {
+            Task<ObservableList<Review>> fetchReviewsTask = new FetchReviewsTask(selectedPlaceName);
+            fetchReviewsTask.setOnSucceeded(e -> displayReviews(fetchReviewsTask.getValue()));
+            new Thread(fetchReviewsTask).start();
+        }
     }
 
     private class FetchPlacesTask extends Task<ObservableList<String>> {
@@ -145,6 +155,85 @@ public class ViewPlaces {
             return places;
         }
     }
+
+    private class FetchReviewsTask extends Task<ObservableList<Review>> {
+        private final String placeName;
+
+        FetchReviewsTask(String placeName) {
+            this.placeName = placeName;
+        }
+
+        @Override
+        protected ObservableList<Review> call() {
+            ObservableList<Review> reviews = FXCollections.observableArrayList();
+            try (Connection c = MySQLConnection.ds.getConnection();
+                 PreparedStatement statement = c.prepareStatement(
+                         "SELECT r.review_id, r.rating, r.comment, a.username " +
+                                 "FROM tblReviews r " +
+                                 "INNER JOIN tblPlace p ON r.place_id = p.place_id " +
+                                 "INNER JOIN tblAccount a ON r.acc_id = a.acc_id " +
+                                 "WHERE p.place_name = ? AND r.isApproved = 1;"
+                 )) {
+
+                statement.setString(1, placeName);
+                ResultSet rs = statement.executeQuery();
+
+                while (rs.next()) {
+                    int reviewId = rs.getInt("review_id");
+                    double rating = rs.getDouble("rating");
+                    String comment = rs.getString("comment");
+                    String username = rs.getString("username");
+                    reviews.add(new Review(reviewId, rating, comment, username));
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return reviews;
+        }
+    }
+
+    private class Review {
+        private final int reviewId;
+        private final double rating;
+        private final String comment;
+        private final String username;
+
+        Review(int reviewId, double rating, String comment, String username) {
+            this.reviewId = reviewId;
+            this.rating = rating;
+            this.comment = comment;
+            this.username = username;
+        }
+
+        public int getReviewId() {
+            return reviewId;
+        }
+
+        public double getRating() {
+            return rating;
+        }
+
+        public String getComment() {
+            return comment;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+    }
+
+    private void displayReviews(ObservableList<Review> reviews) {
+        VBox reviewsContainer = new VBox();
+        for (Review review : reviews) {
+            Label usernameLabel = new Label("User: " + review.getUsername());
+            Label ratingLabel = new Label("Rating: " + review.getRating());
+            Label commentLabel = new Label("Comment: " + review.getComment());
+            reviewsContainer.getChildren().addAll(usernameLabel, ratingLabel, commentLabel);
+        }
+        showScroll.setContent(reviewsContainer);
+    }
+
 
 
 }
