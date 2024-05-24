@@ -27,6 +27,9 @@ public class TableInstantiation {
                     "barangay_id INT(10) NOT NULL, " +
                     "place_name VARCHAR(255) NOT NULL, " +
                     "place_type VARCHAR(255) NOT NULL," +
+                    "place_address VARCHAR(255) NOT NULL," +
+                    "place_landmark VARCHAR(255) NOT NULL," +
+                    "place_about VARCHAR(255) NOT NULL," +
                     "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE)";
 
             String createReviewTableQuery = "CREATE TABLE IF NOT EXISTS tblReviews (" +
