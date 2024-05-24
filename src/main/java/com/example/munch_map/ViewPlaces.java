@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -11,10 +13,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ViewPlaces {
 
@@ -30,6 +34,8 @@ public class ViewPlaces {
     public Button btnDetails;
     public Button btnMenu;
     public Button btnReviews;
+
+    public Button btnBackPlaces;
 
     private String selectedPlaceName;
 
@@ -49,6 +55,8 @@ public class ViewPlaces {
         });
 
         new Thread(fetchPlacesTask).start();
+
+        btnBackPlaces.setOnAction(this::backToBarangayOnClick);
     }
 
     private void updatePlaceDetails(String selectedPlaceName) {
@@ -116,7 +124,16 @@ public class ViewPlaces {
         };
     }
 
+    public void backPlaceOnClick(ActionEvent actionEvent) {
+
+    }
+
     public void detailOnClick(ActionEvent actionEvent) {
+            if (selectedPlaceName != null) {
+                Task<PlaceDetails> fetchPlaceDetailsTask = new FetchPlaceDetailsTask(selectedPlaceName);
+                fetchPlaceDetailsTask.setOnSucceeded(e -> displayPlaceDetails(fetchPlaceDetailsTask.getValue()));
+                new Thread(fetchPlaceDetailsTask).start();
+            }
     }
 
     public void menuOnClick(ActionEvent actionEvent) {
@@ -155,6 +172,91 @@ public class ViewPlaces {
             return places;
         }
     }
+
+    private class FetchPlaceDetailsTask extends Task<PlaceDetails> {
+        private final String placeName;
+
+        FetchPlaceDetailsTask(String placeName) {
+            this.placeName = placeName;
+        }
+
+        @Override
+        protected PlaceDetails call() {
+            try (Connection c = MySQLConnection.ds.getConnection();
+                 PreparedStatement statement = c.prepareStatement(
+                         "SELECT p.place_name, p.place_type, p.place_address, p.place_landmark, p.place_about, AVG(r.rating) as avg_rating " +
+                                 "FROM tblPlace p " +
+                                 "LEFT JOIN tblReviews r ON p.place_id = r.place_id AND r.isApproved = 1 " +
+                                 "WHERE p.place_name = ?;"
+                 )) {
+
+                statement.setString(1, placeName);
+                ResultSet rs = statement.executeQuery();
+
+                if (rs.next()) {
+                    String name = rs.getString("place_name");
+                    String avgRating = rs.getString("avg_rating");
+                    String type = rs.getString("place_type");
+                    String address = rs.getString("place_address");
+                    String landmark = rs.getString("place_landmark");
+                    String about = rs.getString("place_about");
+
+                    return new PlaceDetails(name, avgRating != null ? avgRating : "N/A", type, address, landmark, about);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+    }
+
+    private class PlaceDetails {
+        private final String name;
+        private final String type;
+        private final String address;
+        private final String landmark;
+        private final String about;
+        private final String avgRating;
+
+        PlaceDetails(String name,  String avgRating, String type, String address, String landmark, String about) {
+            this.name = name;
+            this.type = type;
+            this.address = address;
+            this.landmark = landmark;
+            this.about = about;
+            this.avgRating = avgRating;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getAvgRating() {
+            return avgRating;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public String getLandmark() {
+            return landmark;
+        }
+
+        public String getAbout() {
+            return about;
+        }
+
+
+    }
+
+
+
 
     private class FetchReviewsTask extends Task<ObservableList<Review>> {
         private final String placeName;
@@ -232,6 +334,28 @@ public class ViewPlaces {
             reviewsContainer.getChildren().addAll(usernameLabel, ratingLabel, commentLabel);
         }
         showScroll.setContent(reviewsContainer);
+    }
+
+    private void displayPlaceDetails(PlaceDetails placeDetails) {
+        VBox detailsContainer = new VBox();
+        Label nameLabel = new Label("Name: " + placeDetails.getName());
+        Label ratingLabel = new Label("Average Rating: " + placeDetails.getAvgRating());
+        Label typeLabel = new Label("Type: " + placeDetails.getType());
+        Label addressLabel = new Label("Address: " + placeDetails.getAddress());
+        Label landmarkLabel = new Label("Landmark: " + placeDetails.getLandmark());
+        Label aboutLabel = new Label("About: " + placeDetails.getAbout());
+
+        detailsContainer.getChildren().addAll(nameLabel,ratingLabel, typeLabel, addressLabel, landmarkLabel, aboutLabel);
+        showScroll.setContent(detailsContainer);
+    }
+
+    public void backToBarangayOnClick(ActionEvent event) {
+        try {
+            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
+            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
