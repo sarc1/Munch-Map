@@ -26,6 +26,39 @@ String createReviewTableQuery = "CREATE TABLE IF NOT EXISTS tblReviews (" +
     "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
     "isApproved TINYINT(1) NOT NULL DEFAULT 0)";
 
+-- tblAccount
+INSERT INTO tblAccount (username, email, password) VALUES ('john', 'johndoe@example.com', 'doe');
+INSERT INTO tblAccount (username, email, password) VALUES ('jane', 'janesmith@example.com', 'smith');
+INSERT INTO tblAccount (username, email, password) VALUES ('alice', 'alicebrown@example.com', 'brown');
+INSERT INTO tblAccount (username, email, password) VALUES ('bob', 'bobjohnson@example.com', 'johnson');
+INSERT INTO tblAccount (username, email, password) VALUES ('charlie', 'charliedavis@example.com', 'davis');
+INSERT INTO tblAccount (username, email, password) VALUES ('david', 'davidmiller@example.com', 'miller');
+INSERT INTO tblAccount (username, email, password) VALUES ('eva', 'evataylor@example.com', 'taylor');
+INSERT INTO tblAccount (username, email, password) VALUES ('frank', 'frankwhite@example.com', 'white');
+INSERT INTO tblAccount (username, email, password) VALUES ('grace', 'graceharris@example.com', 'harris');
+INSERT INTO tblAccount (username, email, password) VALUES ('hannah', 'hannahmartin@example.com', 'martin');
+INSERT INTO tblAccount (username, email, password) VALUES ('ian', 'ianclark@example.com', 'clark');
+INSERT INTO tblAccount (username, email, password) VALUES ('julia', 'juliawalker@example.com', 'walker');
+INSERT INTO tblAccount (username, email, password) VALUES ('kyle', 'kylehall@example.com', 'hall');
+INSERT INTO tblAccount (username, email, password) VALUES ('laura', 'lauraallen@example.com', 'allen');
+INSERT INTO tblAccount (username, email, password) VALUES ('mike', 'mikeyoung@example.com', 'young');
+INSERT INTO tblAccount (username, email, password) VALUES ('nina', 'ninaking@example.com', 'king');
+INSERT INTO tblAccount (username, email, password) VALUES ('oscar', 'oscarwright@example.com', 'wright');
+INSERT INTO tblAccount (username, email, password) VALUES ('paul', 'paulscott@example.com', 'scott');
+INSERT INTO tblAccount (username, email, password) VALUES ('quincy', 'quincygreen@example.com', 'green');
+INSERT INTO tblAccount (username, email, password) VALUES ('rachel', 'racheladams@example.com', 'adams');
+INSERT INTO tblAccount (username, email, password) VALUES ('sam', 'sambaker@example.com', 'baker');
+INSERT INTO tblAccount (username, email, password) VALUES ('tina', 'tinanelsen@example.com', 'nelsen');
+INSERT INTO tblAccount (username, email, password) VALUES ('uma', 'umaperez@example.com', 'perez');
+INSERT INTO tblAccount (username, email, password) VALUES ('victor', 'victorbell@example.com', 'bell');
+INSERT INTO tblAccount (username, email, password) VALUES ('mikecox', 'mikecoxsmol@example.com', 'smol');
+INSERT INTO tblAccount (username, email, password) VALUES ('xander', 'xanderfox@example.com', 'fox');
+INSERT INTO tblAccount (username, email, password) VALUES ('yara', 'yarabrooks@example.com', 'brooks');
+INSERT INTO tblAccount (username, email, password) VALUES ('zane', 'zanehughes@example.com', 'hughes');
+INSERT INTO tblAccount (username, email, password) VALUES ('ada', 'adafoster@example.com', 'foster');
+INSERT INTO tblAccount (username, email, password) VALUES ('ben', 'bengomez@example.com', 'gomez');
+
+
 -- tblBarangay
 INSERT INTO tblBarangay (barangay_name) VALUES ('Labangon');
 INSERT INTO tblBarangay (barangay_name) VALUES ('Tisa');
@@ -161,37 +194,37 @@ INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Suki-Desu
 
 -- tblReviews
 -- Labangon
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1, 1, 4.0, 'Lovely place, enjoyed the serene atmosphere.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (2, 1, 3.8, 'Great location, thanks for the wonderful hospitality!', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (3, 1, 4.4, 'Amazing views and comfortable stay.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (4, 1, 4.1, 'Fantastic place, I loved every minute of my stay.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (5, 1, 3.9, 'Charming place with exceptional service.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (6, 1, 4.3, 'Excellent amenities and very clean.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (7, 1, 4.2, 'Calm and peaceful with a helpful staff.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1, 26, 4.0, 'Lovely place, enjoyed the serene atmosphere.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (2, 2, 3.8, 'Great location, thanks for the wonderful hospitality!', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (3, 3, 4.4, 'Amazing views and comfortable stay.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (4, 4, 4.1, 'Fantastic place, I loved every minute of my stay.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (5, 5, 3.9, 'Charming place with exceptional service.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (6, 5, 4.3, 'Excellent amenities and very clean.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (7, 26, 4.2, 'Calm and peaceful with a helpful staff.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (8, 1, 4.5, 'Absolutely fantastic, great place to relax.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (9, 1, 4.4, 'Very cozy and comfortable, will definitely visit again.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (10, 1, 4.0, 'Had an amazing time, will highly recommend.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (11, 1, 4.5, 'Great overall experience, loved the decor and ambiance.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (12, 1, 4.6, 'An excellent place to unwind and relax. Top-notch service!', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (9, 13, 4.4, 'Very cozy and comfortable, will definitely visit again.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (10, 12, 4.0, 'Had an amazing time, will highly recommend.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (11, 11, 4.5, 'Great overall experience, loved the decor and ambiance.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (12, 16, 4.6, 'An excellent place to unwind and relax. Top-notch service!', 1);
 -- Tisa
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (13, 2, 4.5, 'Delicious food and quick service.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (14, 2, 3.9, 'Cozy atmosphere and tasty meals.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (15, 2, 4.4, 'Loved the dessert menu.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (16, 2, 4.3, 'The staff was very friendly and attentive.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (17, 2, 4.0, 'Impressive selection of drinks.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (18, 2, 4.2, 'The pasta was cooked to perfection.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (13, 23, 4.5, 'Delicious food and quick service.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (14, 25, 3.9, 'Cozy atmosphere and tasty meals.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (15, 20, 4.4, 'Loved the dessert menu.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (16, 22, 4.3, 'The staff was very friendly and attentive.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (17, 26, 4.0, 'Impressive selection of drinks.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (18, 25, 4.2, 'The pasta was cooked to perfection.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (19, 2, 3.8, 'Enjoyed their healthy salad options.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (20, 2, 4.5, 'The outdoor seating was a great experience.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (21, 2, 4.3, 'Perfect spot for a evening dinner date.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (22, 2, 4.1, 'Their breakfast menu is amazing.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (23, 2, 4.4, 'Extensive wine list.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (24, 2, 4.2, 'Authentic recipes and charming decor.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (25, 2, 4.0, 'Vegetarian-friendly. Loved their plant-based options.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (26, 2, 4.5, 'Unique gourmet dishes, a truly fantastic culinary experience.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (27, 2, 3.9, 'Incredible sushi selection.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (28, 2, 4.1, 'Quick takeout service and friendly staff.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (29, 2, 4.3, 'Cheerful ambiance and perfect for family dining.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (30, 2, 4.4, 'Their homemade bread is to die for.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (20, 26, 4.5, 'The outdoor seating was a great experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (21, 22, 4.3, 'Perfect spot for a evening dinner date.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (22, 12, 4.1, 'Their breakfast menu is amazing.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (23, 10, 4.4, 'Extensive wine list.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (24, 13, 4.2, 'Authentic recipes and charming decor.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (25, 14, 4.0, 'Vegetarian-friendly. Loved their plant-based options.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (26, 17, 4.5, 'Unique gourmet dishes, a truly fantastic culinary experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (27, 26, 3.9, 'Incredible sushi selection.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (28, 19, 4.1, 'Quick takeout service and friendly staff.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (29, 8, 4.3, 'Cheerful ambiance and perfect for family dining.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (30, 6, 4.4, 'Their homemade bread is to die for.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (31, 2, 4.0, 'Excellent coffee and pastries.', 1);
 -- Guadalupe
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (32, 1, 4.8, 'A wonderful place to reflect and pray.', 1);
@@ -220,8 +253,8 @@ INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (5
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (55, 24, 4.9, 'Very calming and inspiring.', 1);
 
 -- Duljo
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (56, 3, 4.2, 'Fantastic variety of shops.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (57, 4, 4.3, 'Great place to find unique items.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (56, 23, 4.2, 'Fantastic variety of shops.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (57, 24, 4.3, 'Great place to find unique items.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (58, 5, 4.1, 'A bit crowded but worth it.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (59, 6, 4.2, 'Lovely atmosphere and great shops.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (60, 7, 4.3, 'Excellent shopping experience.', 1);
@@ -236,7 +269,7 @@ INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (6
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (67, 4, 4.0, 'Convenient and diverse dining choices.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (68, 5, 4.2, 'Great place for a family outing.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (69, 6, 4.0, 'Nice place for casual dining.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (70, 7, 4.1, 'Good food and shopping experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (70, 17, 4.1, 'Good food and shopping experience.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (71, 8, 4.2, 'Enjoyed the dining options.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (72, 9, 4.0, 'Perfect for a quick bite and shopping.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (73, 10, 4.1, 'A must-visit for food lovers.', 1);
@@ -246,12 +279,12 @@ INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (7
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (77, 14, 4.2, 'Enjoyed the shopping and dining.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (78, 15, 4.0, 'A good place to relax and eat.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (79, 16, 4.1, 'Perfect spot for food and shopping.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (80, 17, 4.2, 'Great variety of food and shops.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (80, 24, 4.2, 'Great variety of food and shops.', 1);
 
 -- Punta Princesa
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (81, 2, 4.0, 'Nice place to hang out and eat.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (81, 12, 4.0, 'Nice place to hang out and eat.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (82, 3, 4.1, 'Good selection of restaurants.', 1);
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (83, 4, 4.0, 'Enjoyed the shopping experience.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (83, 24, 4.0, 'Enjoyed the shopping experience.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (84, 5, 4.2, 'Great place for dining and shopping.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (85, 6, 4.0, 'Convenient location and good food.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (86, 7, 4.1, 'Nice mix of shops and eateries.', 1);
