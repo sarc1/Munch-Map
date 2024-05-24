@@ -33,19 +33,22 @@
                 <Pane prefHeight="100.0" prefWidth="316.0" />
                 <VBox prefHeight="100.0" prefWidth="139.0">
                     <children>
-                        <Button fx:id="btnDetails" mnemonicParsing="false" text="Details">
+                        <Button fx:id="btnDetails" mnemonicParsing="false" onAction="#detailOnClick" text="Details">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Button>
-                        <Button fx:id="btnMenu" mnemonicParsing="false" text="Menu">
+                        <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#menuOnClick" text="Menu">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Button>
-                        <Button fx:id="btnReviews" mnemonicParsing="false" text="Reviews" />
+                        <Button fx:id="btnReviews" mnemonicParsing="false" onAction="#reviewsOnClick" text="Reviews" />
                     </children>
                 </VBox>
             </children></HBox>
-        <AnchorPane layoutX="258.0" layoutY="108.0" prefHeight="255.0" prefWidth="508.0" />
+        <AnchorPane fx:id="showAnchor" layoutX="271.0" layoutY="108.0" prefHeight="255.0" prefWidth="464.0">
+         <children>
+            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0" />
+         </children></AnchorPane>
       <Label fx:id="barangay" layoutX="42.0" layoutY="48.0" text="Barangay" />
     </children>
 </AnchorPane>
