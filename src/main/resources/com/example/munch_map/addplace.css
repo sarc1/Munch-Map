@@ -19,13 +19,13 @@
     -fx-font-size: 40px;
     -fx-font-weight: bold;
 }
-#barangay, #name, #coordinates{
+#barangay, #name, #type, #address{
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-fill: #156512;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
-#barangayInput, #nameInput, #coordinatesInput{
+#barangayInput, #nameInput, #typeInput, #addressInput{
     -fx-background-color: #A8DFAD;
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-background-radius: 25px;
