@@ -14,6 +14,6 @@
          <font>
             <Font size="35.0" />
          </font></Text>
-      <Button fx:id="btnAdmin" onAction="#handleViewAdmin" layoutX="39.0" layoutY="493.0" mnemonicParsing="false" text="Admin" />
+      <Button fx:id="btnAdmin" layoutX="39.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleViewAdmin" text="Admin" />
     </children>
 </AnchorPane>
