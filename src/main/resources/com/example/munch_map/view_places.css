@@ -18,18 +18,24 @@
 }
 
 #placeListView{
-    -fx-background-color: #2EE6FF;
+    -fx-background-color: #00C5E0;
     -fx-background-radius: 10;
     -fx-padding: 5;
+
 }
 .list-cell{
+    -fx-background-color: #00C5E0;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-background-radius: 15;
+}
+#showScroll{
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
-    -fx-background-radius: 5;
     -fx-padding: 5;
 }
-
 
 
 #hboxPlaceDetails{
@@ -49,6 +55,7 @@
 }
 #placeType{
     -fx-font-family: "Baloo 2", sans-serif;
+    -fx-color: #A7A7A7;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
@@ -58,8 +65,15 @@
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
+#vboxdetails, #information, #buttons{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius:
 
-#placeType{}
+}
+
+#placeType{
+
+}
 #btnDetails{
     -fx-background-color: #FFFFFF;
     -fx-corner-color: #000000;
