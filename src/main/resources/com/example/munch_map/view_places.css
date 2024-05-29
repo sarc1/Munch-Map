@@ -25,13 +25,14 @@
 }
 .list-cell{
     -fx-background-color: #00C5E0;
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
     -fx-background-radius: 15;
+    -fx-padding: 5;
 }
 #showScroll{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
     -fx-padding: 5;
@@ -44,38 +45,39 @@
 }
 
 #placeName{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 #placeRating{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 #placeType{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-color: #A7A7A7;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
 #placeStatus{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 #vboxdetails, #information, #buttons{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius:
-
 }
 
 #placeType{
 
 }
 #btnDetails{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
     -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
@@ -86,7 +88,11 @@
     -fx-layout-orientation: center;
 }
 #btnMenu{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
     -fx-background-radius: 10;
@@ -96,7 +102,11 @@
     -fx-layout-orientation: center;
 }
 #btnReviews{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
     -fx-background-radius: 10;
@@ -104,4 +114,14 @@
     -fx-pref-width: 100px;
     -fx-pref-height: 100px;
     -fx-layout-orientation: center;
+}
+
+.review-box{
+    -fx-padding: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-margin-bottom: 10px;
 }
