@@ -5,13 +5,14 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -41,6 +42,7 @@ public class ViewPlaces {
 
 
     public void initialize() {
+        showScroll.setVisible(false);
         barangayNameLabel.setText(Barangay.selectedBarangay);
         places = FXCollections.observableArrayList();
 
@@ -55,12 +57,12 @@ public class ViewPlaces {
         });
 
         new Thread(fetchPlacesTask).start();
-
-        btnBackPlaces.setOnAction(this::backToBarangayOnClick);
     }
 
     private void updatePlaceDetails(String selectedPlaceName) {
         placeName.setText(selectedPlaceName);
+
+        showScroll.setVisible(false);
 
         Task<String> getPlaceRatingFromDBTask = getPlaceRatingFromDBTask(selectedPlaceName);
         new Thread(getPlaceRatingFromDBTask).start();
@@ -77,9 +79,9 @@ public class ViewPlaces {
             public String call() {
                 try (Connection c = MySQLConnection.ds.getConnection();
                      PreparedStatement statement = c.prepareStatement(
-                             "SELECT AVG(r.rating) as avg_rating " +
+                             "SELECT ROUND(AVG(r.rating), 2) as avg_rating " +
                                      "FROM tblReviews r " +
-                                     "INNER JOIN tblPlace p ON r.place_id = p.place_id " +
+                                     "INNER JOIN tblPlace p ON r.place_id = p.place_id AND r.isApproved = 1 " +
                                      "WHERE p.place_name = ?;"
                      )) {
 
@@ -125,7 +127,14 @@ public class ViewPlaces {
     }
 
     public void backPlaceOnClick(ActionEvent actionEvent) {
-
+        try {
+            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
+            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
+            barangayPage.getStylesheets().clear();
+            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void detailOnClick(ActionEvent actionEvent) {
@@ -173,7 +182,7 @@ public class ViewPlaces {
         }
     }
 
-    private class FetchPlaceDetailsTask extends Task<PlaceDetails> {
+    private static class FetchPlaceDetailsTask extends Task<PlaceDetails> {
         private final String placeName;
 
         FetchPlaceDetailsTask(String placeName) {
@@ -184,7 +193,7 @@ public class ViewPlaces {
         protected PlaceDetails call() {
             try (Connection c = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = c.prepareStatement(
-                         "SELECT p.place_name, p.place_type, p.place_address, p.place_landmark, p.place_about, AVG(r.rating) as avg_rating " +
+                         "SELECT p.place_name, p.place_type, p.place_address, p.place_landmark, p.place_about, ROUND(AVG(r.rating), 2) as avg_rating " +
                                  "FROM tblPlace p " +
                                  "LEFT JOIN tblReviews r ON p.place_id = r.place_id AND r.isApproved = 1 " +
                                  "WHERE p.place_name = ?;"
@@ -211,54 +220,7 @@ public class ViewPlaces {
         }
     }
 
-    private class PlaceDetails {
-        private final String name;
-        private final String type;
-        private final String address;
-        private final String landmark;
-        private final String about;
-        private final String avgRating;
-
-        PlaceDetails(String name,  String avgRating, String type, String address, String landmark, String about) {
-            this.name = name;
-            this.type = type;
-            this.address = address;
-            this.landmark = landmark;
-            this.about = about;
-            this.avgRating = avgRating;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getAvgRating() {
-            return avgRating;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public String getLandmark() {
-            return landmark;
-        }
-
-        public String getAbout() {
-            return about;
-        }
-
-
-    }
-
-
-
-
-    private class FetchReviewsTask extends Task<ObservableList<Review>> {
+    private static class FetchReviewsTask extends Task<ObservableList<Review>> {
         private final String placeName;
 
         FetchReviewsTask(String placeName) {
@@ -281,11 +243,10 @@ public class ViewPlaces {
                 ResultSet rs = statement.executeQuery();
 
                 while (rs.next()) {
-                    int reviewId = rs.getInt("review_id");
                     double rating = rs.getDouble("rating");
                     String comment = rs.getString("comment");
                     String username = rs.getString("username");
-                    reviews.add(new Review(reviewId, rating, comment, username));
+                    reviews.add(new Review(rating, comment, username));
                 }
 
             } catch (SQLException e) {
@@ -295,71 +256,51 @@ public class ViewPlaces {
         }
     }
 
-    private class Review {
-        private final int reviewId;
-        private final double rating;
-        private final String comment;
-        private final String username;
+    private void displayPlaceDetails(PlaceDetails placeDetails) {
+        showScroll.setVisible(true);
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
 
-        Review(int reviewId, double rating, String comment, String username) {
-            this.reviewId = reviewId;
-            this.rating = rating;
-            this.comment = comment;
-            this.username = username;
-        }
+        grid.add(new Label("Name:"), 0, 0);
+        grid.add(new Label("Average Rating:"), 0, 1);
+        grid.add(new Label("Type:"), 0, 2);
+        grid.add(new Label("Address:"), 0, 3);
+        grid.add(new Label("Landmark:"), 0, 4);
+        grid.add(new Label("About:"), 0, 5);
 
-        public int getReviewId() {
-            return reviewId;
-        }
+        grid.add(new Label(placeDetails.getName()), 1, 0);
+        grid.add(new Label(placeDetails.getAvgRating()), 1, 1);
+        grid.add(new Label(placeDetails.getType()), 1, 2);
+        grid.add(new Label(placeDetails.getAddress()), 1, 3);
+        grid.add(new Label(placeDetails.getLandmark()), 1, 4);
+        grid.add(new Label(placeDetails.getAbout()), 1, 5);
 
-        public double getRating() {
-            return rating;
-        }
-
-        public String getComment() {
-            return comment;
-        }
-
-        public String getUsername() {
-            return username;
-        }
+        showScroll.setContent(grid);
     }
 
     private void displayReviews(ObservableList<Review> reviews) {
-        VBox reviewsContainer = new VBox();
+        showScroll.setVisible(true);
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(0, 10, 0, 10));
+
+        int row = 0;
         for (Review review : reviews) {
-            Label usernameLabel = new Label("User: " + review.getUsername());
-            Label ratingLabel = new Label("Rating: " + review.getRating());
-            Label commentLabel = new Label("Comment: " + review.getComment());
-            reviewsContainer.getChildren().addAll(usernameLabel, ratingLabel, commentLabel);
+            grid.add(new Label("User:"), 0, row);
+            grid.add(new Label("Rating:"), 0, row + 1);
+            grid.add(new Label("Comment:"), 0, row + 2);
+
+            grid.add(new Label(review.getUsername()), 1, row);
+            grid.add(new Label(String.valueOf(review.getRating())), 1, row + 1);
+            grid.add(new Label(review.getComment()), 1, row + 2);
+
+            row += 3;
         }
-        showScroll.setContent(reviewsContainer);
+
+        showScroll.setContent(grid);
     }
-
-    private void displayPlaceDetails(PlaceDetails placeDetails) {
-        VBox detailsContainer = new VBox();
-        Label nameLabel = new Label("Name: " + placeDetails.getName());
-        Label ratingLabel = new Label("Average Rating: " + placeDetails.getAvgRating());
-        Label typeLabel = new Label("Type: " + placeDetails.getType());
-        Label addressLabel = new Label("Address: " + placeDetails.getAddress());
-        Label landmarkLabel = new Label("Landmark: " + placeDetails.getLandmark());
-        Label aboutLabel = new Label("About: " + placeDetails.getAbout());
-
-        detailsContainer.getChildren().addAll(nameLabel,ratingLabel, typeLabel, addressLabel, landmarkLabel, aboutLabel);
-        showScroll.setContent(detailsContainer);
-    }
-
-    public void backToBarangayOnClick(ActionEvent event) {
-        try {
-            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
-            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
-            barangayPage.getStylesheets().clear();
-            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
 }

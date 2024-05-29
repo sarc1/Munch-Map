@@ -1,31 +1,25 @@
 package com.example.munch_map;
 
 public class Review {
-    private String title;
-    private String content;
-    private int rating;
+    private final double rating;
+    private final String comment;
+    private final String username;
 
-    public String getTitle() {
-        return title;
+    Review(double rating, String comment, String username) {
+        this.rating = rating;
+        this.comment = comment;
+        this.username = username;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public String getComment() {
+        return comment;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
