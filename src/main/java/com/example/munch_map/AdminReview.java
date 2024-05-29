@@ -1,19 +1,14 @@
 package com.example.munch_map;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-
 
 public class AdminReview {
     @FXML
@@ -84,12 +79,9 @@ public class AdminReview {
                 e.printStackTrace();
                 e.getCause();
             }
-
             return pseudoRoot;
         }
     }
-
-
 }
 
 

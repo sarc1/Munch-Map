@@ -67,8 +67,6 @@
 }
 #vboxdetails, #information, #buttons{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius:
-
 }
 
 #placeType{
@@ -104,4 +102,14 @@
     -fx-pref-width: 100px;
     -fx-pref-height: 100px;
     -fx-layout-orientation: center;
+}
+
+.review-box{
+    -fx-padding: 10px;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-margin-bottom: 10px;
 }
