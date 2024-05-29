@@ -8,6 +8,7 @@
     -fx-fill: #34AC90;
     -fx-font-size: 50px;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 0, 0.0 , 0 , 2.5 );
 }
 
 #btnLogin{
