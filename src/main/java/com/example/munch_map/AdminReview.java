@@ -1,17 +1,21 @@
 package com.example.munch_map;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public class AdminReview {
@@ -26,6 +30,9 @@ public class AdminReview {
 
     @FXML
     private Label lblReviewID, lblPlace, lblUsername, lblRating;
+
+    @FXML
+    private AnchorPane anchorpaneAdminReview;
 
     @FXML
     private List<Review> reviews = new ArrayList<>();
@@ -96,8 +103,6 @@ public class AdminReview {
                         }
                     }
                 });
-
-
     }
 
     // Method to recursively expand all nodes in the TreeView
@@ -118,6 +123,18 @@ public class AdminReview {
         }
     }
 
+    public void onReturnButtonClick(ActionEvent actionEvent) {
+        try {
+            AnchorPane p = anchorpaneAdminReview;
+            Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
+            p.getScene().getStylesheets().clear();
+            p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+            p.getChildren().clear();
+            p.getChildren().add(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private class FetchReviewsTask extends Task<TreeItem<String>> {
         @Override
@@ -259,7 +276,6 @@ public class AdminReview {
         }
     }
 
-
     private void updateReviewDetails() {
         if (currentReviewIndex >= 0 && currentReviewIndex < reviews.size()) {
             Review review = reviews.get(currentReviewIndex);
@@ -347,6 +363,7 @@ public class AdminReview {
 
             } catch (SQLException ex) {
                 System.err.println("Error: " + ex.getMessage());
+
             }
         }
     }

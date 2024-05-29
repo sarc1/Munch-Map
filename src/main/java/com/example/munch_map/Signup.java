@@ -2,6 +2,7 @@ package com.example.munch_map;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -81,5 +82,18 @@ public class Signup {
             }
         });
         new Thread(task).start();
+    }
+
+    public void onReturnButtonClick(ActionEvent actionEvent) {
+        try {
+            AnchorPane p = SignUpPage;
+            Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MunchMap.fxml")));
+            p.getScene().getStylesheets().clear();
+            p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("munchmap.css")).toExternalForm());
+            p.getChildren().clear();
+            p.getChildren().add(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
