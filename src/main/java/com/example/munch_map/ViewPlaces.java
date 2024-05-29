@@ -55,8 +55,6 @@ public class ViewPlaces {
         });
 
         new Thread(fetchPlacesTask).start();
-
-        btnBackPlaces.setOnAction(this::backToBarangayOnClick);
     }
 
     private void updatePlaceDetails(String selectedPlaceName) {
@@ -125,7 +123,14 @@ public class ViewPlaces {
     }
 
     public void backPlaceOnClick(ActionEvent actionEvent) {
-
+        try {
+            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
+            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
+            barangayPage.getStylesheets().clear();
+            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void detailOnClick(ActionEvent actionEvent) {
@@ -255,9 +260,6 @@ public class ViewPlaces {
 
     }
 
-
-
-
     private class FetchReviewsTask extends Task<ObservableList<Review>> {
         private final String placeName;
 
@@ -308,9 +310,10 @@ public class ViewPlaces {
             this.username = username;
         }
 
-        public int getReviewId() {
-            return reviewId;
-        }
+//        We do not need this :P
+//        public int getReviewId() {
+//            return reviewId;
+//        }
 
         public double getRating() {
             return rating;
@@ -348,18 +351,4 @@ public class ViewPlaces {
         detailsContainer.getChildren().addAll(nameLabel,ratingLabel, typeLabel, addressLabel, landmarkLabel, aboutLabel);
         showScroll.setContent(detailsContainer);
     }
-
-    public void backToBarangayOnClick(ActionEvent event) {
-        try {
-            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
-            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
-            barangayPage.getStylesheets().clear();
-            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }

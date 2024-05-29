@@ -3,7 +3,6 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.web.*?>
 
 <AnchorPane fx:id="viewPlacesAnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.ViewPlaces">
     <children>
@@ -52,10 +51,7 @@
             </children></HBox>
         <AnchorPane fx:id="showAnchor" layoutX="271.0" layoutY="108.0" prefHeight="255.0" prefWidth="464.0">
          <children>
-            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0">
-               <content>
-                  <WebView prefHeight="256.0" prefWidth="466.0" />
-               </content></ScrollPane>
+            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0" />
          </children></AnchorPane>
       <Label fx:id="barangay" layoutX="42.0" layoutY="48.0" text="Barangay" />
     </children>
