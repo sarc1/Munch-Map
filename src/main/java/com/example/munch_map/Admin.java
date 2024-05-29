@@ -5,9 +5,6 @@ import javafx.scene.control.ComboBox;
 
 public class Admin extends User {
 
-
-
-
     public Admin() {
         super();
     }
