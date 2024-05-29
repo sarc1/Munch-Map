@@ -40,7 +40,8 @@ public class TableInstantiation {
                     "comment VARCHAR(255)," +
                     "FOREIGN KEY (place_id) REFERENCES tblPlace(place_id) ON DELETE CASCADE," +
                     "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
-                    "isApproved TINYINT(1) NOT NULL DEFAULT 0)";
+                    "isApproved TINYINT(1) NOT NULL DEFAULT 0," +
+                    "isDeleted TINYINT(1) NOT NULL DEFAULT 0)";
 
             // Query Executions
             statement.execute(createAccountTableQuery);
