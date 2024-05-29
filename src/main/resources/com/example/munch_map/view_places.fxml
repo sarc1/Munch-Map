@@ -9,30 +9,36 @@
       <Button fx:id="btnBackPlaces" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPlaceOnClick" text="&lt;" />
         <Label fx:id="barangayNameLabel" layoutX="226.0" layoutY="47.0" prefHeight="18.0" prefWidth="193.0" textFill="#000000" />
         <ListView fx:id="placeListView" layoutX="27.0" layoutY="108.0" prefHeight="418.0" prefWidth="221.0" />
-        <HBox fx:id="hboxPlaceDetails" layoutX="271.0" layoutY="389.0" prefHeight="100.0" prefWidth="508.0">
+        <HBox fx:id="hboxPlaceDetails" layoutX="271.0" layoutY="389.0" prefHeight="138.0" prefWidth="508.0">
             <children>
-                <VBox prefHeight="100.0" prefWidth="148.0">
+                <VBox fx:id="vboxdetails" prefHeight="138.0" prefWidth="179.0">
                     <children>
-                        <Label fx:id="placeName" prefHeight="18.0" prefWidth="78.0" text="Name">
+                        <Label fx:id="placeName" prefHeight="34.0" prefWidth="152.0" text="Name">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" top="8.0" />
                      </VBox.margin></Label>
-                        <Label fx:id="placeRating" prefHeight="18.0" prefWidth="78.0" text="Rating">
+                        <Label fx:id="placeRating" text="Rating">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" />
                      </VBox.margin></Label>
-                        <Label fx:id="placeType" prefHeight="18.0" prefWidth="86.0" text="Type">
+                        <Label fx:id="placeType" prefHeight="18.0" prefWidth="147.0" text="Type">
                      <VBox.margin>
                         <Insets bottom="5.0" left="10.0" />
                      </VBox.margin></Label>
-                        <Label fx:id="placeStatus" layoutX="10.0" layoutY="28.0" prefHeight="18.0" prefWidth="78.0" text="Status">
+                        <Label fx:id="placeStatus" layoutX="10.0" layoutY="28.0" prefHeight="18.0" prefWidth="145.0" text="Status">
                      <VBox.margin>
                         <Insets bottom="8.0" left="10.0" />
                      </VBox.margin></Label>
                     </children>
+               <HBox.margin>
+                  <Insets bottom="8.0" left="8.0" top="8.0" />
+               </HBox.margin>
                 </VBox>
-                <Pane fx:id="information" prefHeight="100.0" prefWidth="316.0" />
-                <VBox prefHeight="100.0" prefWidth="139.0">
+                <Pane fx:id="information" prefHeight="138.0" prefWidth="258.0">
+               <HBox.margin>
+                  <Insets bottom="8.0" top="8.0" />
+               </HBox.margin></Pane>
+                <VBox fx:id="buttons" prefHeight="138.0" prefWidth="124.0">
                     <children>
                         <Button fx:id="btnDetails" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#detailOnClick" text="Details">
                      <VBox.margin>
@@ -47,6 +53,9 @@
                         <Insets bottom="8.0" />
                      </VBox.margin></Button>
                     </children>
+               <HBox.margin>
+                  <Insets bottom="8.0" right="8.0" top="8.0" />
+               </HBox.margin>
                 </VBox>
             </children></HBox>
         <AnchorPane fx:id="showAnchor" layoutX="271.0" layoutY="108.0" prefHeight="255.0" prefWidth="464.0">

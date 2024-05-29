@@ -5,14 +5,24 @@
     -fx-background-color: #DEFFE1;
 }
 
-.combo-box-base {
+#barangayComboBox {
     -fx-background-radius: 15;
     -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
     -fx-background-color: #34AC90;
+
+}
+
+#lblYourBarangay{
+    -fx-color: #34AC90;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 35px;
 }
 
 .list-cell{
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-background-radius: 15;
-    -fx-font-size: 15px;
+    -fx-font-size: 13pt;
 }
+

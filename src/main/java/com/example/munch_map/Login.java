@@ -24,7 +24,6 @@ public class Login {
     PasswordField passwordInput;
     @FXML
     AnchorPane LoginPage;
-
     static User activeUser;
     static Admin activeAdmin;
 
@@ -32,16 +31,11 @@ public class Login {
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                try (Connection c = MySQLConnection.ds.getConnection();
-                     Statement statement = c.createStatement()) {
-
+                try (Connection c = MySQLConnection.ds.getConnection(); Statement statement = c.createStatement()) {
                     String query = "SELECT * FROM tblAccount";
                     ResultSet list = statement.executeQuery(query);
-
                     while (list.next()) {
-                        if ((useremailInput.getText().equals(list.getString("username")) ||
-                                useremailInput.getText().equals(list.getString("email"))) &&
-                                passwordInput.getText().equals(list.getString("password"))) {
+                        if ((useremailInput.getText().equals(list.getString("username")) || useremailInput.getText().equals(list.getString("email"))) && passwordInput.getText().equals(list.getString("password"))) {
                             if (list.getBoolean("admin_status")) {
                                 activeAdmin = new Admin(list.getString("username"), list.getString("email"), true);
                             } else {
@@ -49,7 +43,7 @@ public class Login {
                             }
                         }
                     }
-                    // TOD0: Add error message
+                    // TODO: Add error message
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -60,7 +54,12 @@ public class Login {
         task.setOnSucceeded(event -> {
             try {
                 AnchorPane p = LoginPage;
-                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
+                Parent scene;
+                if (activeAdmin != null) {
+                    scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin_review.fxml")));
+                } else {
+                    scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
+                }
                 p.getScene().getStylesheets().clear();
                 p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
                 p.getChildren().clear();

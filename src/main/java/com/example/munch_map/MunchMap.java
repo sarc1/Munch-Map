@@ -5,7 +5,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -15,7 +17,9 @@ public class MunchMap {
 
     @FXML
     AnchorPane LoginSignupPage;
+    Text lblMunchMap;
 
+    @FXML
     public void onLoginButtonClick() throws IOException {
         AnchorPane p = LoginSignupPage;
         p.getScene().getStylesheets().clear();
