@@ -353,6 +353,8 @@ public class ViewPlaces {
         try {
             Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
             viewPlacesAnchorPane.getChildren().setAll(barangayPage);
+            barangayPage.getStylesheets().clear();
+            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
         } catch (IOException e) {
             e.printStackTrace();
         }
