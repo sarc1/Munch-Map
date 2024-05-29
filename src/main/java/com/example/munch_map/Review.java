@@ -43,4 +43,7 @@ public class Review {
     public String getUsername() {
         return username;
     }
+
+    public String getReviewID() { return reviewID;
+    }
 }

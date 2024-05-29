@@ -209,7 +209,9 @@ public class AdminReview {
     @FXML
     public void handlePrev() {
         if (currentReviewIndex > 0) {
-            currentReviewIndex--;
+            do {
+                currentReviewIndex--;
+            } while (currentReviewIndex >= 0 && isReviewAccessible(reviews.get(currentReviewIndex)));
             updateReviewDetails();
         }
     }
@@ -217,10 +219,13 @@ public class AdminReview {
     @FXML
     public void handleNext() {
         if (currentReviewIndex < (reviews.size() - 1)) {
-            currentReviewIndex++;
+            do {
+                currentReviewIndex++;
+            } while (currentReviewIndex <= (reviews.size() - 1) && isReviewAccessible(reviews.get(currentReviewIndex)));
             updateReviewDetails();
         }
     }
+
 
     private void updateReviewDetails() {
         if (currentReviewIndex >= 0 && currentReviewIndex < reviews.size()) {
@@ -231,6 +236,23 @@ public class AdminReview {
             lblRating.setText("Rating: " + review.rating);
             txtComment.setText(review.comment);
         }
+    }
+
+    private boolean isReviewAccessible(Review review) {
+        try (Connection connectDB = MySQLConnection.ds.getConnection()) {
+            String checkQuery = "SELECT isApproved, isDeleted FROM tblReviews WHERE review_id = ?";
+            PreparedStatement statement = connectDB.prepareStatement(checkQuery);
+            statement.setString(1, review.getReviewID());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getBoolean("isApproved") || resultSet.getBoolean("isDeleted");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+        return true; // by default, assume non-accessible
     }
 
     public void refreshTreeView() {
