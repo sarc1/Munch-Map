@@ -276,7 +276,6 @@ public class ViewPlaces {
     private void displayReviews(ObservableList<Review> reviews) {
         showScroll.setVisible(true);
         VBox reviewsContainer = new VBox();
-//        reviewsContainer.setPadding(new Insets(0, 10, 0, 10));
 
         for (Review review : reviews) {
             VBox singleReviewBox = new VBox();
