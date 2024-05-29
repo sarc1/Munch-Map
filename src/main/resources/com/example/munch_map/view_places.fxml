@@ -3,8 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane fx:id="viewPlacesAnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.ViewPlaces">
+<AnchorPane fx:id="viewPlacesAnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.ViewPlaces">
     <children>
       <Button fx:id="btnBackPlaces" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPlaceOnClick" text="&lt;" />
         <Label fx:id="barangayNameLabel" layoutX="226.0" layoutY="47.0" prefHeight="18.0" prefWidth="193.0" textFill="#000000" />
@@ -48,7 +49,10 @@
             </children></HBox>
         <AnchorPane fx:id="showAnchor" layoutX="271.0" layoutY="108.0" prefHeight="255.0" prefWidth="464.0">
          <children>
-            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0" />
+            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0">
+               <content>
+                  <WebView prefHeight="256.0" prefWidth="466.0" />
+               </content></ScrollPane>
          </children></AnchorPane>
       <Label fx:id="barangay" layoutX="42.0" layoutY="48.0" text="Barangay" />
     </children>
