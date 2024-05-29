@@ -13,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -43,6 +42,7 @@ public class ViewPlaces {
 
 
     public void initialize() {
+        showScroll.setVisible(false);
         barangayNameLabel.setText(Barangay.selectedBarangay);
         places = FXCollections.observableArrayList();
 
@@ -61,6 +61,8 @@ public class ViewPlaces {
 
     private void updatePlaceDetails(String selectedPlaceName) {
         placeName.setText(selectedPlaceName);
+
+        showScroll.setVisible(false);
 
         Task<String> getPlaceRatingFromDBTask = getPlaceRatingFromDBTask(selectedPlaceName);
         new Thread(getPlaceRatingFromDBTask).start();
@@ -191,7 +193,7 @@ public class ViewPlaces {
         protected PlaceDetails call() {
             try (Connection c = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = c.prepareStatement(
-                         "SELECT p.place_name, p.place_type, p.place_address, p.place_landmark, p.place_about, AVG(r.rating) as avg_rating " +
+                         "SELECT p.place_name, p.place_type, p.place_address, p.place_landmark, p.place_about, ROUND(AVG(r.rating), 2) as avg_rating " +
                                  "FROM tblPlace p " +
                                  "LEFT JOIN tblReviews r ON p.place_id = r.place_id AND r.isApproved = 1 " +
                                  "WHERE p.place_name = ?;"
@@ -255,6 +257,7 @@ public class ViewPlaces {
     }
 
     private void displayPlaceDetails(PlaceDetails placeDetails) {
+        showScroll.setVisible(true);
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
@@ -278,6 +281,7 @@ public class ViewPlaces {
     }
 
     private void displayReviews(ObservableList<Review> reviews) {
+        showScroll.setVisible(true);
         GridPane grid = new GridPane();
         grid.setHgap(10);
         grid.setVgap(10);
