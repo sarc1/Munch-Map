@@ -69,7 +69,7 @@ INSERT INTO tblBarangay (barangay_name) VALUES ('Punta Princesa');
 INSERT INTO tblBarangay (barangay_name) VALUES ('Capitol Site');
 
 -- Labangon
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delish Cafe', 'Cafe', 'Near Labangon','Labangons','Somewhere in Labangon',1);
+INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delish Cafe', 'Cafe');
 INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Black and White Coffee Shop', 'Cafe');
 INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Siomai Master', 'Chinese Restaurant');
 INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Tatay Sisigan', 'Sisig');
@@ -314,6 +314,3 @@ INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (108, 18, 4.0, 'Good food and nice ambiance.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (109, 19, 4.1, 'Loved the food and atmosphere.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (110, 20, 4.2, 'Great place to eat and shop.', 1);
-
-
-

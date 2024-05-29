@@ -35,3 +35,8 @@
     -fx-background-radius: 25px;
     -fx-font-weight: bold;
 }
+
+#errorText {
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-fill: red;
+}

@@ -30,7 +30,11 @@ public class TableInstantiation {
                     "place_address VARCHAR(255) NOT NULL," +
                     "place_landmark VARCHAR(255) NOT NULL," +
                     "place_about VARCHAR(255) NOT NULL," +
-                    "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE)";
+                    "acc_id INT NOT NULL," +
+                    "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE," +
+                    "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
+                    "isApproved TINYINT(1) NOT NULL DEFAULT 0," +
+                    "isDeleted TINYINT(1) NOT NULL DEFAULT 0)";
 
             String createReviewTableQuery = "CREATE TABLE IF NOT EXISTS tblReviews (" +
                     "review_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +

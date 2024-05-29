@@ -130,9 +130,9 @@ public class ViewPlaces {
     public void backPlaceOnClick(ActionEvent actionEvent) {
         try {
             Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
-            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
-            barangayPage.getStylesheets().clear();
-            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+            viewPlacesAnchorPane.getScene().getStylesheets().clear();
+            viewPlacesAnchorPane.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+            viewPlacesAnchorPane.getChildren().add(barangayPage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -263,12 +263,12 @@ public class ViewPlaces {
         box.setPadding(new Insets(0, 10, 0, 10));
 
         box.getChildren().addAll(
-                new HBox(new Label("Name:"), new Label(placeDetails.getName())),
-                new HBox(new Label("Average Rating:"), new Label(placeDetails.getAvgRating())),
-                new HBox(new Label("Type:"), new Label(placeDetails.getType())),
-                new HBox(new Label("Address:"), new Label(placeDetails.getAddress())),
-                new HBox(new Label("Landmark:"), new Label(placeDetails.getLandmark())),
-                new HBox(new Label("About:"), new Label(placeDetails.getAbout()))
+                new HBox(new Label("Name: "), new Label(placeDetails.getName())),
+                new HBox(new Label("Average Rating: "), new Label(placeDetails.getAvgRating())),
+                new HBox(new Label("Type: "), new Label(placeDetails.getType())),
+                new HBox(new Label("Address: "), new Label(placeDetails.getAddress())),
+                new HBox(new Label("Landmark: "), new Label(placeDetails.getLandmark())),
+                new HBox(new Label("About: "), new Label(placeDetails.getAbout()))
         );
         showScroll.setContent(box);
     }
@@ -276,7 +276,6 @@ public class ViewPlaces {
     private void displayReviews(ObservableList<Review> reviews) {
         showScroll.setVisible(true);
         VBox reviewsContainer = new VBox();
-//        reviewsContainer.setPadding(new Insets(0, 10, 0, 10));
 
         for (Review review : reviews) {
             VBox singleReviewBox = new VBox();

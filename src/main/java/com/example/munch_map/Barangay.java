@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 
@@ -21,6 +22,7 @@ public class Barangay {
     public AnchorPane barangayPage;
     public ComboBox<BarangayItem> barangayComboBox;
     public static String selectedBarangay;
+    public Button btnAdmin;
 
 
     public void initialize() {
@@ -69,6 +71,23 @@ public class Barangay {
                 }
             }
         });
+    }
+
+    public void handleViewAdmin(ActionEvent actionEvent) {
+        try {
+            if(Admin.isActive) {
+                AnchorPane p = barangayPage;
+                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin_review.fxml")));
+                p.getScene().getStylesheets().clear();
+                p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("admin_review.css")).toExternalForm());
+                p.getChildren().clear();
+                p.getChildren().add(scene);
+                btnAdmin.setVisible(true);
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 
