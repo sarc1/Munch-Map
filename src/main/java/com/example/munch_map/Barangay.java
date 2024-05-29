@@ -19,16 +19,16 @@ import java.util.Objects;
 
 public class Barangay {
     public AnchorPane barangayPage;
-    public ComboBox<String> barangayComboBox;
+    public ComboBox<BarangayItem> barangayComboBox;
     public static String selectedBarangay;
 
 
     public void initialize() {
-        Task<ObservableList<String>> task = new Task<>() {
+        Task<ObservableList<BarangayItem>> task = new Task<>() {
             @Override
-            public ObservableList<String> call() {
+            public ObservableList<BarangayItem> call() {
 
-                ObservableList<String> barangays = FXCollections.observableArrayList();
+                ObservableList<BarangayItem> barangays = FXCollections.observableArrayList();
 
                 try (Connection c = MySQLConnection.ds.getConnection();
                      Statement statement = c.createStatement()) {
@@ -37,8 +37,8 @@ public class Barangay {
                     ResultSet list = statement.executeQuery(query);
 
                     while(list.next()) {
-                        String name = list.getString("barangay_name");
-                        barangays.add(name);
+                        BarangayItem barangayItem = new BarangayItem(list.getString("barangay_name"));
+                        barangays.add(barangayItem);
                     }
 
                 } catch (SQLException e) {
@@ -57,7 +57,7 @@ public class Barangay {
             @Override
             public void handle(ActionEvent actionEvent) {
                 try {
-                    selectedBarangay = barangayComboBox.getSelectionModel().getSelectedItem();
+                    selectedBarangay = barangayComboBox.getSelectionModel().getSelectedItem().getName();
                     AnchorPane p = barangayPage;
                     Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view_places.fxml")));
                     p.getScene().getStylesheets().clear();
