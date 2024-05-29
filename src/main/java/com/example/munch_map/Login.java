@@ -72,12 +72,8 @@ public class Login {
         task.setOnSucceeded(event -> {
             try {
                 AnchorPane p = LoginPage;
-                Parent scene;
-                if (activeAdmin != null) {
-                    scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin_review.fxml")));
-                } else {
-                    scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
-                }
+                Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Barangay.fxml")));
+
                 p.getScene().getStylesheets().clear();
                 p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
                 p.getChildren().clear();
