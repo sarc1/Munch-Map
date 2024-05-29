@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.AdminReview">
+<AnchorPane fx:id="anchorpaneAdminReview" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.AdminReview">
     <children>
           <ScrollPane fx:id="scrollReviews" layoutX="277.0" layoutY="66.0" prefHeight="255.0" prefWidth="500.0" />
       <Button fx:id="btnDeny" layoutX="277.0" layoutY="334.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="Deny" />
       <Button fx:id="btnApprove" layoutX="537.0" layoutY="334.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="240.0" text="Approve" />
       <ChoiceBox fx:id="cbAdminReview" layoutX="24.0" layoutY="30.0" prefHeight="26.0" prefWidth="222.0" />
-        <ListView fx:id="listviewReviews" layoutX="24.0" layoutY="66.0" prefHeight="462.0" prefWidth="222.0" />
+      <TreeView fx:id="treeviewReview" layoutX="24.0" layoutY="66.0" prefHeight="468.0" prefWidth="222.0" />
     </children>
 </AnchorPane>

@@ -6,6 +6,8 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeView;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +20,7 @@ public class AdminReview {
     private ChoiceBox<String> cbAdminReview;
 
     @FXML
-    private ListView<String> listviewReviews;
+    private TreeView<String> treeviewReview;
 
     @FXML
     public void initialize() {
@@ -26,44 +28,67 @@ public class AdminReview {
         cbAdminReview.getItems().addAll("Reviews", "Added Places");
 
         //FetchReviewTask
-        Task<ObservableList<String>> fetchReviewsTask = new FetchReviewsTask();
-        listviewReviews.itemsProperty().bind(fetchReviewsTask.valueProperty());
+        Task<TreeItem<String>> fetchReviewsTask = new FetchReviewsTask();
+        treeviewReview.rootProperty().bind(fetchReviewsTask.valueProperty());
 
         new Thread(fetchReviewsTask).start();
     }
 
-    private class FetchReviewsTask extends Task<ObservableList<String>> {
+    private class FetchReviewsTask extends Task<TreeItem<String>> {
         @Override
-        protected ObservableList<String> call() throws Exception {
-            ObservableList<String> reviews = FXCollections.observableArrayList();
+        protected TreeItem<String> call() throws Exception {
 
-            String getReviewsQuery = "SELECT b.barangay_name, p.place_name, r.comment " +
-                    "FROM tblReviews r " +
-                    "JOIN tblPlace p ON r.place_id = p.place_id " +
-                    "JOIN tblBarangay b ON p.barangay_id = b.barangay_id " +
-                    "WHERE r.isApproved = 0 AND r.isDeleted = 0 " +
-                    "ORDER BY b.barangay_name, p.place_name";
+            TreeItem<String> pseudoRoot = new TreeItem<> ("Root");
+
+            String getReviewsQuery =
+                    "SELECT b.barangay_name, p.place_name, r.comment " +
+                            "FROM tblReviews r " +
+                            "JOIN tblPlace p ON r.place_id = p.place_id " +
+                            "JOIN tblBarangay b ON p.barangay_id = b.barangay_id " +
+                            "WHERE r.isApproved = 0 AND r.isDeleted = 0 " +
+                            "ORDER BY b.barangay_name, p.place_name";
 
             try (Connection connectDB = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = connectDB.prepareStatement(getReviewsQuery)) {
 
                 ResultSet queryOutput = statement.executeQuery();
+                TreeItem<String> barangayItem = null;
+                TreeItem<String> placeItem = null;
+                String currentBarangay = "";
+                String currentPlace = "";
 
                 while(queryOutput.next()) {
                     String barangayName = queryOutput.getString("barangay_name");
                     String placeName = queryOutput.getString("place_name");
                     String review = queryOutput.getString("comment");
 
-                    reviews.add(barangayName + "\n- " + placeName + "\n    :" + review);
-                }
+                    if (!barangayName.equals(currentBarangay)) {
+                        barangayItem = new TreeItem<>(barangayName);
+                        pseudoRoot.getChildren().add(barangayItem);
+                        currentBarangay = barangayName;
+                        // Reset place for new barangay
+                        currentPlace = "";
+                    }
 
+                    if (barangayItem != null && !placeName.equals(currentPlace)) {
+                        placeItem = new TreeItem<>(placeName);
+                        barangayItem.getChildren().add(placeItem);
+                        currentPlace = placeName;
+                    }
+
+                    if (placeItem != null) {
+                        placeItem.getChildren().add(new TreeItem<>(review));
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 e.getCause();
             }
-            return reviews;
+
+            return pseudoRoot;
         }
     }
+
 
 }
 
