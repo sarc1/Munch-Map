@@ -1,5 +1,6 @@
 package com.example.munch_map;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,12 +9,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Objects;
 
 public class Login {
@@ -24,18 +26,24 @@ public class Login {
     PasswordField passwordInput;
     @FXML
     AnchorPane LoginPage;
+    @FXML
+    Text errorText;
     static User activeUser;
     static Admin activeAdmin;
 
-    public void onLoginButtonClick() throws IOException {
-        Task<Void> task = new Task<>() {
+    public void onLoginButtonClick() {
+        Task<Void> task = new Task<Void>() {
             @Override
-            protected Void call() {
-                try (Connection c = MySQLConnection.ds.getConnection(); Statement statement = c.createStatement()) {
-                    String query = "SELECT * FROM tblAccount";
-                    ResultSet list = statement.executeQuery(query);
-                    while (list.next()) {
-                        if ((useremailInput.getText().equals(list.getString("username")) || useremailInput.getText().equals(list.getString("email"))) && passwordInput.getText().equals(list.getString("password"))) {
+            protected Void call() throws SQLException {
+                try (Connection c = MySQLConnection.ds.getConnection()) {
+                    String query = "SELECT * FROM tblAccount WHERE (username = ? OR email = ?) AND password = ?";
+                    PreparedStatement stmt = c.prepareStatement(query);
+                    stmt.setString(1, useremailInput.getText());
+                    stmt.setString(2, useremailInput.getText());
+                    stmt.setString(3, passwordInput.getText());
+
+                    try (ResultSet list = stmt.executeQuery()) {
+                        while (list.next()) {
                             if (list.getBoolean("admin_status")) {
                                 activeAdmin = new Admin(list.getString("username"), list.getString("email"), true);
                             } else {
@@ -43,13 +51,23 @@ public class Login {
                             }
                         }
                     }
-                    // TODO: Add error message
-                } catch (SQLException e) {
-                    e.printStackTrace();
+
+                    if (activeAdmin == null && activeUser == null) {
+                        throw new SQLException("Incorrect Username or Password");
+                    }
                 }
+
                 return null;
             }
         };
+
+        task.setOnFailed(event -> {
+            Platform.runLater(() -> {
+                useremailInput.clear();
+                passwordInput.clear();
+                errorText.setText("Incorrect Username or Password");
+            });
+        });
 
         task.setOnSucceeded(event -> {
             try {
@@ -71,4 +89,5 @@ public class Login {
 
         new Thread(task).start();
     }
+
 }

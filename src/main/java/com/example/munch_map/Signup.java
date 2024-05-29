@@ -1,5 +1,6 @@
 package com.example.munch_map;
 
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +28,14 @@ public class Signup {
     PasswordField passwordInput;
     @FXML
     AnchorPane SignUpPage;
+    @FXML
+    Text errorText;
 
     public void onSignUpButtonClick() {
 
         Task<Void> task = new Task<>() {
             @Override
-            protected Void call() {
+            protected Void call() throws SQLException {
                 try (Connection c = MySQLConnection.ds.getConnection();
                      PreparedStatement statement = c.prepareStatement(
                              "INSERT INTO tblAccount (username, email, password) VALUES (?, ?, ?)"
@@ -45,21 +48,25 @@ public class Signup {
 
                     ResultSet list = checker.executeQuery();
 
-                    if(list.next()) {
+                    if (list.next()) {
                         // TOD0: Implement Error Message
-                        System.out.println("Username or Email already exists");
+                        throw new SQLException("Username or Email Already Exists");
                     } else {
                         statement.setString(1, usernameInput.getText());
                         statement.setString(2, emailInput.getText());
                         statement.setString(3, passwordInput.getText());
                         statement.executeUpdate();
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
                 return null;
             }
         };
+
+        task.setOnFailed(event -> {
+            Platform.runLater(() -> {
+                errorText.setText("Username or Email Already Exists");
+            });
+        });
 
         task.setOnSucceeded(event -> {
             try {
