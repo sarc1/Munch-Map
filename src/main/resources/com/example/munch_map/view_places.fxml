@@ -10,13 +10,13 @@
       <Button fx:id="btnBackPlaces" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPlaceOnClick" text="&lt;" />
         <Label fx:id="barangayNameLabel" layoutX="226.0" layoutY="47.0" prefHeight="18.0" prefWidth="193.0" textFill="#000000" />
         <ListView fx:id="placeListView" layoutX="27.0" layoutY="108.0" prefHeight="418.0" prefWidth="221.0" />
-        <HBox fx:id="hboxPlaceDetails" layoutX="267.0" layoutY="402.0" prefHeight="100.0" prefWidth="508.0">
+        <HBox fx:id="hboxPlaceDetails" layoutX="271.0" layoutY="389.0" prefHeight="100.0" prefWidth="508.0">
             <children>
                 <VBox prefHeight="100.0" prefWidth="148.0">
                     <children>
                         <Label fx:id="placeName" prefHeight="18.0" prefWidth="78.0" text="Name">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" />
+                        <Insets bottom="5.0" left="10.0" top="8.0" />
                      </VBox.margin></Label>
                         <Label fx:id="placeRating" prefHeight="18.0" prefWidth="78.0" text="Rating">
                      <VBox.margin>
@@ -28,22 +28,25 @@
                      </VBox.margin></Label>
                         <Label fx:id="placeStatus" layoutX="10.0" layoutY="28.0" prefHeight="18.0" prefWidth="78.0" text="Status">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="10.0" />
+                        <Insets bottom="8.0" left="10.0" />
                      </VBox.margin></Label>
                     </children>
                 </VBox>
-                <Pane prefHeight="100.0" prefWidth="316.0" />
+                <Pane fx:id="information" prefHeight="100.0" prefWidth="316.0" />
                 <VBox prefHeight="100.0" prefWidth="139.0">
                     <children>
-                        <Button fx:id="btnDetails" mnemonicParsing="false" onAction="#detailOnClick" text="Details">
+                        <Button fx:id="btnDetails" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#detailOnClick" text="Details">
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="5.0" top="8.0" />
                      </VBox.margin></Button>
                         <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#menuOnClick" text="Menu">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Button>
-                        <Button fx:id="btnReviews" mnemonicParsing="false" onAction="#reviewsOnClick" text="Reviews" />
+                        <Button fx:id="btnReviews" mnemonicParsing="false" onAction="#reviewsOnClick" text="Reviews">
+                     <VBox.margin>
+                        <Insets bottom="8.0" />
+                     </VBox.margin></Button>
                     </children>
                 </VBox>
             </children></HBox>
