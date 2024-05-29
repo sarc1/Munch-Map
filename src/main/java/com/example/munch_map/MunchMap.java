@@ -7,7 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -52,6 +55,12 @@ public class MunchMap {
         Parent loading = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("transition.fxml")));
         loading.getStylesheets().add(Objects.requireNonNull(getClass().getResource("transition.css")).toExternalForm());
         p.getChildren().add(loading);
+
+//        Image image = new Image();
+//        ImageView imageView = new ImageView(image);
+//        StackPane stackPane = new StackPane();
+//        stackPane.getChildren().add(imageView);
+//        p.getChildren().add(stackPane);
 
 
 
