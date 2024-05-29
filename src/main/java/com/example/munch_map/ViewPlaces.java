@@ -12,7 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -258,49 +259,36 @@ public class ViewPlaces {
 
     private void displayPlaceDetails(PlaceDetails placeDetails) {
         showScroll.setVisible(true);
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(0, 10, 0, 10));
+        VBox box = new VBox(10);
+        box.setPadding(new Insets(0, 10, 0, 10));
 
-        grid.add(new Label("Name:"), 0, 0);
-        grid.add(new Label("Average Rating:"), 0, 1);
-        grid.add(new Label("Type:"), 0, 2);
-        grid.add(new Label("Address:"), 0, 3);
-        grid.add(new Label("Landmark:"), 0, 4);
-        grid.add(new Label("About:"), 0, 5);
-
-        grid.add(new Label(placeDetails.getName()), 1, 0);
-        grid.add(new Label(placeDetails.getAvgRating()), 1, 1);
-        grid.add(new Label(placeDetails.getType()), 1, 2);
-        grid.add(new Label(placeDetails.getAddress()), 1, 3);
-        grid.add(new Label(placeDetails.getLandmark()), 1, 4);
-        grid.add(new Label(placeDetails.getAbout()), 1, 5);
-
-        showScroll.setContent(grid);
+        box.getChildren().addAll(
+                new HBox(new Label("Name:"), new Label(placeDetails.getName())),
+                new HBox(new Label("Average Rating:"), new Label(placeDetails.getAvgRating())),
+                new HBox(new Label("Type:"), new Label(placeDetails.getType())),
+                new HBox(new Label("Address:"), new Label(placeDetails.getAddress())),
+                new HBox(new Label("Landmark:"), new Label(placeDetails.getLandmark())),
+                new HBox(new Label("About:"), new Label(placeDetails.getAbout()))
+        );
+        showScroll.setContent(box);
     }
 
     private void displayReviews(ObservableList<Review> reviews) {
         showScroll.setVisible(true);
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(0, 10, 0, 10));
+        VBox reviewsContainer = new VBox();
+//        reviewsContainer.setPadding(new Insets(0, 10, 0, 10));
 
-        int row = 0;
         for (Review review : reviews) {
-            grid.add(new Label("User:"), 0, row);
-            grid.add(new Label("Rating:"), 0, row + 1);
-            grid.add(new Label("Comment:"), 0, row + 2);
-
-            grid.add(new Label(review.getUsername()), 1, row);
-            grid.add(new Label(String.valueOf(review.getRating())), 1, row + 1);
-            grid.add(new Label(review.getComment()), 1, row + 2);
-
-            row += 3;
+            VBox singleReviewBox = new VBox();
+            singleReviewBox.getChildren().addAll(
+                    new HBox(new Label("User: "), new Label(review.getUsername())),
+                    new HBox(new Label("Rating: "), new Label(String.valueOf(review.getRating()))),
+                    new HBox(new Label("Comment: "), new Label(review.getComment()))
+            );
+            singleReviewBox.getStyleClass().add("review-box");
+            reviewsContainer.getChildren().add(singleReviewBox);
         }
-
-        showScroll.setContent(grid);
+        reviewsContainer.prefWidthProperty().bind(showScroll.widthProperty());
+        showScroll.setContent(reviewsContainer);
     }
-
 }
