@@ -55,8 +55,6 @@ public class ViewPlaces {
         });
 
         new Thread(fetchPlacesTask).start();
-
-        btnBackPlaces.setOnAction(this::backToBarangayOnClick);
     }
 
     private void updatePlaceDetails(String selectedPlaceName) {
@@ -125,7 +123,14 @@ public class ViewPlaces {
     }
 
     public void backPlaceOnClick(ActionEvent actionEvent) {
-
+        try {
+            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
+            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
+            barangayPage.getStylesheets().clear();
+            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void detailOnClick(ActionEvent actionEvent) {
@@ -173,7 +178,7 @@ public class ViewPlaces {
         }
     }
 
-    private class FetchPlaceDetailsTask extends Task<PlaceDetails> {
+    private static class FetchPlaceDetailsTask extends Task<PlaceDetails> {
         private final String placeName;
 
         FetchPlaceDetailsTask(String placeName) {
@@ -211,54 +216,7 @@ public class ViewPlaces {
         }
     }
 
-    private class PlaceDetails {
-        private final String name;
-        private final String type;
-        private final String address;
-        private final String landmark;
-        private final String about;
-        private final String avgRating;
-
-        PlaceDetails(String name,  String avgRating, String type, String address, String landmark, String about) {
-            this.name = name;
-            this.type = type;
-            this.address = address;
-            this.landmark = landmark;
-            this.about = about;
-            this.avgRating = avgRating;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getAvgRating() {
-            return avgRating;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public String getLandmark() {
-            return landmark;
-        }
-
-        public String getAbout() {
-            return about;
-        }
-
-
-    }
-
-
-
-
-    private class FetchReviewsTask extends Task<ObservableList<Review>> {
+    private static class FetchReviewsTask extends Task<ObservableList<Review>> {
         private final String placeName;
 
         FetchReviewsTask(String placeName) {
@@ -281,47 +239,16 @@ public class ViewPlaces {
                 ResultSet rs = statement.executeQuery();
 
                 while (rs.next()) {
-                    int reviewId = rs.getInt("review_id");
                     double rating = rs.getDouble("rating");
                     String comment = rs.getString("comment");
                     String username = rs.getString("username");
-                    reviews.add(new Review(reviewId, rating, comment, username));
+                    reviews.add(new Review(rating, comment, username));
                 }
 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             return reviews;
-        }
-    }
-
-    private class Review {
-        private final int reviewId;
-        private final double rating;
-        private final String comment;
-        private final String username;
-
-        Review(int reviewId, double rating, String comment, String username) {
-            this.reviewId = reviewId;
-            this.rating = rating;
-            this.comment = comment;
-            this.username = username;
-        }
-
-        public int getReviewId() {
-            return reviewId;
-        }
-
-        public double getRating() {
-            return rating;
-        }
-
-        public String getComment() {
-            return comment;
-        }
-
-        public String getUsername() {
-            return username;
         }
     }
 
@@ -348,18 +275,4 @@ public class ViewPlaces {
         detailsContainer.getChildren().addAll(nameLabel,ratingLabel, typeLabel, addressLabel, landmarkLabel, aboutLabel);
         showScroll.setContent(detailsContainer);
     }
-
-    public void backToBarangayOnClick(ActionEvent event) {
-        try {
-            Parent barangayPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("barangay.fxml")));
-            viewPlacesAnchorPane.getChildren().setAll(barangayPage);
-            barangayPage.getStylesheets().clear();
-            barangayPage.getStylesheets().add(Objects.requireNonNull(getClass().getResource("barangay.css")).toExternalForm());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 }
