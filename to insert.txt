@@ -1,31 +1,3 @@
-String createAccountTableQuery = "CREATE TABLE IF NOT EXISTS tblAccount(" +
-    "acc_id INT AUTO_INCREMENT PRIMARY KEY," +
-    "username VARCHAR(100) NOT NULL," +
-    "email VARCHAR(100) NOT NULL," +
-    "password VARCHAR(100) NOT NULL)";
-
-String createBarangayTableQuery = "CREATE TABLE IF NOT EXISTS tblBarangay(" +
-    "barangay_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-    "barangay_name VARCHAR(255) NOT NULL UNIQUE)";
-
-
-String createPlaceTableQuery = "CREATE TABLE IF NOT EXISTS tblPlace (" +
-    "place_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-    "barangay_id INT(10) NOT NULL, " +
-    "place_name VARCHAR(255) NOT NULL, " +
-    "place_type VARCHAR(255) NOT NULL," +
-    "FOREIGN KEY (barangay_id) REFERENCES tblBarangay(barangay_id) ON DELETE CASCADE)";
-
-String createReviewTableQuery = "CREATE TABLE IF NOT EXISTS tblReviews (" +
-    "review_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," +
-    "place_id INT(10) NOT NULL," +
-    "acc_id INT NOT NULL," +
-    "rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0.0 AND rating <= 5.0)," +
-    "comment VARCHAR(255)," +
-    "FOREIGN KEY (place_id) REFERENCES tblPlace(place_id) ON DELETE CASCADE," +
-    "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
-    "isApproved TINYINT(1) NOT NULL DEFAULT 0)";
-
 -- tblAccount
 INSERT INTO tblAccount (username, email, password) VALUES ('john', 'johndoe@example.com', 'doe');
 INSERT INTO tblAccount (username, email, password) VALUES ('jane', 'janesmith@example.com', 'smith');
@@ -69,132 +41,132 @@ INSERT INTO tblBarangay (barangay_name) VALUES ('Punta Princesa');
 INSERT INTO tblBarangay (barangay_name) VALUES ('Capitol Site');
 
 -- Labangon
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delish Cafe', 'Cafe');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Black and White Coffee Shop', 'Cafe');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Siomai Master', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Tatay Sisigan', 'Sisig');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Tuslob Buwa sa Labangon', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Kuya Simo''s Larangan', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Hans Pex Food Parlor', 'Asian Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Delchiz', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Papay Baldo"s Grill', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Food Trip Section', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Su-Khe', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (1, 'Jayvin''s BBQ', 'Soup Kitchen');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Delish Cafe', 'Cafe','Natalio B. Bacalso Ave, Cebu City, 6000 Cebu','Cebu Institute of Technology - University','A cafe that serves affordable food and beverages.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Black and White Coffee Shop', 'Cafe','Natalio B. Bacalso Ave, Cebu City, 6000 Cebu','Cebu Institute of Technology - University','A cafe that serves affordable beverages items.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Siomai Master', 'Chinese Restaurant','Natalio B. Bacalso Ave, Cebu City, 6000 Cebu','Cebu Institute of Technology - University','A fast-food style chinese restaurant.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Tatay Sisigan', 'Sisig','Mariano Abella St, Cebu City, 6000 Cebu','Cebu Institute of Technology - University','A sisig house.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Tuslob Buwa sa Labangon', 'Restaurant','328 Katipunan St, Cebu City, 6000 Cebu','Across Happy Batter Desserts','A restaurant based on the Filipino taste.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Kuya Simo''s Larangan', 'Restaurant','Katipunan St, Cebu City, 6000 Cebu','01 WATER REFILLING STATION','A restaurant that mainly serves soup-based food.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Hans Pex Food Parlor', 'Asian Restaurant','166 Tres de Abril St, Cebu City, 6000 Cebu','Vape8 Labangon','This homey place is designed for your comfort. Its like your second homr away from home.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Delchiz', 'Fusion restaurant','86 Salvador St, Cebu City, 6000 Cebu','MS TRADING','A fusion restaurant.');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Papay Baldo"s Grill', 'Barbecue Restaurant','Katipunan St, Cebu City, 6000 Cebu','Kuya Simo''s Larangan','A restaurant that focus on grilled food');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'American Rib House', 'Takeout Restaurant','99-B Katipunan St, Cebu City, 6000 Cebu','ACE Cyclemotor Trading Labangon','A restaurant that focuses on American food');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Cole''s Kansi', 'Filipino Restaurant','53-191 Salvador St, Cebu City, 6000 Cebu','BENKZ APARTMENT','A Filipino restaurant that focuses on dishes from the Negros Regions');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (1, 'Jayvin''s BBQ', 'Soup Kitchen','110 - A Katipunan St, Cebu City, 6000 Cebu','Binglens General Merchandise','A cheap unlimited restaurant.');
 
 -- Tisa
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Siomai sa Tisa', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Pater sa Tisa', 'Halal restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'PAPSY''S BBQ - Tisa', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Sofia', 'Punok-Punok');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'May Abohan', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Kuya Jeff''s Siomayan D'' Original SIOMAI SA TISA', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Braddex', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Way Tugpahay Siomai Sa Tisa', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Kuya Jeff''s Siomayan', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'El Inaya Gourmet-Tisa', 'Halal restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Silogan Sa Tisa', 'Breakfast Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'KRAB Seafood Restaurant', 'Seafood Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'I Love Bucket Shrimps - CUBE Tisa', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Halang Halang Sa Tisa', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'The Good Burger', 'Hamburger Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Monbi''s Halo Halo', 'Dessert restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Sol''s Halo Halo and Desserts', 'Dessert Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Narnia Tuslob Buwa', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (2, 'Melton''s Halo-Halo', 'Dessert Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Siomai sa Tisa', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Pater sa Tisa', 'Halal restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'PAPSY''S BBQ - Tisa', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Sofia', 'Punok-Punok','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'May Abohan', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Kuya Jeff''s Siomayan D'' Original SIOMAI SA TISA', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Braddex', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Way Tugpahay Siomai Sa Tisa', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Kuya Jeff''s Siomayan', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'El Inaya Gourmet-Tisa', 'Halal restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Silogan Sa Tisa', 'Breakfast Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'KRAB Seafood Restaurant', 'Seafood Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'I Love Bucket Shrimps - CUBE Tisa', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Halang Halang Sa Tisa', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'The Good Burger', 'Hamburger Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Monbi''s Halo Halo', 'Dessert restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Sol''s Halo Halo and Desserts', 'Dessert Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Narnia Tuslob Buwa', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (2, 'Melton''s Halo-Halo', 'Dessert Restaurant','','','');
 
 -- Guadalupe
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kuzina Guadalupe', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Mr. Dagupeño - Guadalupe, Cebu', 'Takeout Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Takeout Restaurant', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Rodeo Grill Guadalupe', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Legaya''s Eatery', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'D'' Original Lamaw sa Guadalupe', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sizzling Garden', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Frian''s Cafe', 'Cafe');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kusina ni Nasing', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sigmaw sa Guadalupe', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Ann''s Ngohiong by Doming''s', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'JuanLaagan Special BBQ + Ngohiong - Guadalupe', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Jollibee', 'FastFood');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Ned Nanay''s Grill', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Lola Eats', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Silogan Ni Gian', 'Breakfast Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Smoke Stack', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Chowking', 'FastFood');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'McDonald''s', 'FastFood');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'AA BBQ Main', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Kantin pork steak and pork ribs (guada branch)', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Eastern Hub Restaurant', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'Sizzling Garden', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (3, 'G. Street', 'Barbecue Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Kuzina Guadalupe', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Mr. Dagupeño - Guadalupe, Cebu', 'Takeout Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Takeout Restaurant', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Rodeo Grill Guadalupe', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Legaya''s Eatery', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'D'' Original Lamaw sa Guadalupe', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Sizzling Garden', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Frian''s Cafe', 'Cafe','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Kusina ni Nasing', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Sigmaw sa Guadalupe', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Ann''s Ngohiong by Doming''s', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'JuanLaagan Special BBQ + Ngohiong - Guadalupe', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Jollibee', 'FastFood','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Ned Nanay''s Grill', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Lola Eats', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Silogan Ni Gian', 'Breakfast Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Smoke Stack', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Chowking', 'FastFood','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'McDonald''s', 'FastFood','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'AA BBQ Main', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Kantin pork steak and pork ribs (guada branch)', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Eastern Hub Restaurant', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'Sizzling Garden', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (3, 'G. Street', 'Barbecue Restaurant','','','');
 
 -- Duljo
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Padilla Carenderia Eatery', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'D'' Lucky Corner', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'One Big Eat Carinderia', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Amatullah Food Shop', 'Takeout Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Beef Pares ni RagDex', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Julie''s Bakeshop', 'Bakery');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'JAYDEE''S SILOGAN', 'Breakfast Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Frina''s Lechon', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (4, 'Loy''s Tuslob Buwa - Duljo', 'Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Padilla Carenderia Eatery', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'D'' Lucky Corner', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'One Big Eat Carinderia', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Amatullah Food Shop', 'Takeout Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Beef Pares ni RagDex', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Julie''s Bakeshop', 'Bakery','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'JAYDEE''S SILOGAN', 'Breakfast Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Frina''s Lechon', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (4, 'Loy''s Tuslob Buwa - Duljo', 'Restaurant','','','');
 
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Max''s Restaurant', 'Chicken Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Zubuchon', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Patty Pie', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'RACKS SM Seaside Cebu', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Yayoi Japanese Teishoku Restaurant', 'Japanese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Bigby''s Cafe & Restaurant', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Lechoneria SM Seaside Cebu', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Tong Yang - SM Seaside City Cebu', 'Buffet Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Café Laguna - SM Seaside', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Kuya J', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Hukad', 'Filipino	 Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Cabalen', 'Buffet Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Choobi Choobi', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Casa Verde', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Tim Ho Wan', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (5, 'Ribshack', 'Unli-Rice Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Max''s Restaurant', 'Chicken Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Zubuchon', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Patty Pie', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'RACKS SM Seaside Cebu', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Yayoi Japanese Teishoku Restaurant', 'Japanese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Bigby''s Cafe & Restaurant', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Lechoneria SM Seaside Cebu', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Tong Yang - SM Seaside City Cebu', 'Buffet Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Café Laguna - SM Seaside', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Kuya J', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Hukad', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Cabalen', 'Buffet Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Choobi Choobi', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Casa Verde', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Tim Ho Wan', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (5, 'Ribshack', 'Unli-Rice Restaurant','','','');
 
 -- Punta Princesa
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Alberto''s Pizza Punta Princesa', 'Pizza Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Kusina sa Ganciang Eatery', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Salie''s Craving', 'Pizza Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Paeng''s Chicken - Punta Princesa', 'Barbecue');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Jean''s Kandingan Carenderia', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Sio Mai Wey', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Ian-Inzo Eatery', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Ngohiong Express - Punta', 'FastFood');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Penny''s Carenderia', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Nippy''s Food House', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (6, 'Mers Paluto', 'Cafeteria');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Alberto''s Pizza Punta Princesa', 'Pizza Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Kusina sa Ganciang Eatery', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Salie''s Craving', 'Pizza Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Paeng''s Chicken - Punta Princesa', 'Barbecue','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Jean''s Kandingan Carenderia', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Sio Mai Wey', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Ian-Inzo Eatery', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Ngohiong Express - Punta', 'FastFood','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Penny''s Carenderia', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Nippy''s Food House', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (6, 'Mers Paluto', 'Cafeteria','','','');
 
 -- Capitol Site
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Carlo''s Batchoy', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Raul''s Restaurant', 'Soup Kitchen');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Beef Pares sa Capitol', 'Filipino Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Han-nya Japanese Restaurant', 'Japanese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Manila Foodshoppe', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Cecilia''s Kitchen', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Capitol Site Eatery', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Phát Phố', 'Vietnamese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Pearl Meat Shop', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Why Chicken Cebu Capitol', 'Chicken Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Ala King', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Mr. Crab Capitol', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Chinita Eatery', 'Cafeteria');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Mommy Auring''s Lechon Cebu', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Times Kitchen', 'Chinese Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Abiyo Uno', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Red Bowl', 'Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Ned Nanay''s Grill', 'Barbecue Restaurant');
-INSERT INTO tblPlace (barangay_id, place_name, place_type) VALUES (7, 'Suki-Desu', 'Japanese Restaurant');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Carlo''s Batchoy', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Raul''s Restaurant', 'Soup Kitchen','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Beef Pares sa Capitol', 'Filipino Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Han-nya Japanese Restaurant', 'Japanese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Manila Foodshoppe', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Cecilia''s Kitchen', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Capitol Site Eatery', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Phát Phố', 'Vietnamese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Pearl Meat Shop', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Why Chicken Cebu Capitol', 'Chicken Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Ala King', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Mr. Crab Capitol', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Chinita Eatery', 'Cafeteria','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Mommy Auring''s Lechon Cebu', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Times Kitchen', 'Chinese Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Abiyo Uno', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Red Bowl', 'Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Ned Nanay''s Grill', 'Barbecue Restaurant','','','');
+INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address, place_landmark, place_about) VALUES (7, 'Suki-Desu', 'Japanese Restaurant','','','');
 
 
 -- tblReviews
 -- Labangon
-INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1, 26, 4.0, 'Lovely place, enjoyed the serene atmosphere.', 1);
+INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved, isDeleted) VALUES (1, 26, 4.0, 'Lovely place, enjoyed the serene atmosphere.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (2, 2, 3.8, 'Great location, thanks for the wonderful hospitality!', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (3, 3, 4.4, 'Amazing views and comfortable stay.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (4, 4, 4.1, 'Fantastic place, I loved every minute of my stay.', 1);
@@ -314,6 +286,3 @@ INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (1
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (108, 18, 4.0, 'Good food and nice ambiance.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (109, 19, 4.1, 'Loved the food and atmosphere.', 1);
 INSERT INTO tblReviews (place_id, acc_id, rating, comment, isApproved) VALUES (110, 20, 4.2, 'Great place to eat and shop.', 1);
-
-
-
