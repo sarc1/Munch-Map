@@ -12,6 +12,8 @@ public class User {
         this.isActive = isActive;
     }
 
+    public User() {}
+
     public String getUsername() {
         return username;
     }
