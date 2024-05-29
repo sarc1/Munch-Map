@@ -31,27 +31,36 @@ public class AdminReview {
     private List<Review> reviews = new ArrayList<>();
     private int currentReviewIndex = -1;
 
+    private String chosenReviewStatus = "";
+
+    @FXML
+    Button btnDeny, btnApprove, btnNext, btnPrev;
+
 //    @FXML
 //    private Button btnDeny, btnApprove;
 
     @FXML
     public void initialize() {
-        // Initialize the ComboBox or other components if needed
-        cbAdminReview.getItems().addAll("Reviews", "Added Places");
+        // Initialize the ComboBox or other components if needed\
 
-
+        cbAdminReview.getItems().addAll("Reviews (Unchecked)","Reviews (Approved)","Reviews (Deleted)","New Places (Unchecked)","New Places (Approved)","New Places (Deleted)");
 
         cbAdminReview.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            if ("Reviews".equals(newValue)) {
-                //FetchReviewTask
+            if (newValue != null && newValue.startsWith("Reviews")) {
+                chosenReviewStatus = newValue.replace("Reviews (", "").replace(")", "");
+
                 Task<TreeItem<String>> fetchReviewsTask = new FetchReviewsTask();
                 treeviewReview.rootProperty().bind(fetchReviewsTask.valueProperty());
-                treeviewReview.setShowRoot(false); // Makes the root node invisible
-                txtComment.setVisible(true);
+                 // Makes the root node invisible
+                if (!newValue.equals(oldValue)) {
+                    reviews.clear();
+                    currentReviewIndex = 0;
+                }
+
 
                 new Thread(fetchReviewsTask).start();
 
-                currentReviewIndex = 0;
+
                 updateReviewDetails();
 
             }
@@ -72,6 +81,8 @@ public class AdminReview {
                             String reviewId = selectedReview.replace("Review#", "");
                             statement.setString(1, reviewId);
                             ResultSet resultSet = statement.executeQuery();
+                            treeviewReview.setShowRoot(false);
+                            txtComment.setVisible(true);
 
                             if (resultSet.next()) {
                                 lblReviewID.setText("Review ID: " + resultSet.getString("review_id"));
@@ -107,6 +118,7 @@ public class AdminReview {
         }
     }
 
+
     private class FetchReviewsTask extends Task<TreeItem<String>> {
         @Override
         protected TreeItem<String> call() throws Exception {
@@ -117,9 +129,21 @@ public class AdminReview {
                             "FROM tblReviews r " +
                             "JOIN tblPlace p ON r.place_id = p.place_id " +
                             "JOIN tblBarangay b ON p.barangay_id = b.barangay_id " +
-                            "JOIN tblAccount a ON r.acc_id = a.acc_id " +
-                            "WHERE r.isApproved = 0 AND r.isDeleted = 0 " +
-                            "ORDER BY b.barangay_name, p.place_name";
+                            "JOIN tblAccount a ON r.acc_id = a.acc_id";
+
+
+            if ("Unchecked".equals(chosenReviewStatus)) {
+                hideButtons(true);
+                getReviewsQuery += " WHERE r.isApproved = 0 AND r.isDeleted = 0";
+            } else if ("Approved".equals(chosenReviewStatus)) {
+                hideButtons(false);
+                getReviewsQuery += " WHERE r.isApproved = 1";
+            } else if ("Deleted".equals(chosenReviewStatus)) {
+                getReviewsQuery += " WHERE r.isDeleted = 1";
+                hideButtons(false);
+            }
+
+            getReviewsQuery += " ORDER BY b.barangay_name, p.place_name";
 
             try (Connection connectDB = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = connectDB.prepareStatement(getReviewsQuery)) {
@@ -207,8 +231,17 @@ public class AdminReview {
     }
 
     @FXML
+    public void hideButtons(boolean show){
+
+        btnDeny.setVisible(show);
+        btnApprove.setVisible(show);
+        btnNext.setVisible(show);
+        btnPrev.setVisible(show);
+    }
+
+    @FXML
     public void handlePrev() {
-        if (currentReviewIndex > 0) {
+        if (currentReviewIndex > 0 && "Unchecked".equals(chosenReviewStatus)) {
             do {
                 currentReviewIndex--;
             } while (currentReviewIndex >= 0 && isReviewAccessible(reviews.get(currentReviewIndex)));
@@ -218,7 +251,7 @@ public class AdminReview {
 
     @FXML
     public void handleNext() {
-        if (currentReviewIndex < (reviews.size() - 1)) {
+        if (currentReviewIndex < (reviews.size() - 1) && "Unchecked".equals(chosenReviewStatus)) {
             do {
                 currentReviewIndex++;
             } while (currentReviewIndex <= (reviews.size() - 1) && isReviewAccessible(reviews.get(currentReviewIndex)));
@@ -270,7 +303,7 @@ public class AdminReview {
     @FXML
     public void handleDeny() {
         String selectedItem = cbAdminReview.getSelectionModel().getSelectedItem();
-        if ("Reviews".equals(selectedItem) && currentReviewIndex >= 0) {
+        if ("Reviews (Unchecked)".equals(selectedItem) && currentReviewIndex >= 0)  {
             Review review = reviews.get(currentReviewIndex);
             String updateQuery = "UPDATE tblReviews SET isDeleted = 1 WHERE review_id = ?";
 
@@ -294,7 +327,7 @@ public class AdminReview {
     @FXML
     public void handleApprove() {
         String selectedItem = cbAdminReview.getSelectionModel().getSelectedItem();
-        if ("Reviews".equals(selectedItem) && currentReviewIndex >= 0) {
+        if ("Reviews (Unchecked)".equals(selectedItem) && currentReviewIndex >= 0){
             Review review = reviews.get(currentReviewIndex);
             String updateQuery = "UPDATE tblReviews SET isApproved = 1, comment = ? WHERE review_id = ?";
 

@@ -4,12 +4,12 @@ public class User {
     // For the Purpose of Logging Usernames and Active Emails
     private String username;
     private String email;
-    private boolean isActive = false;
+    public static boolean isActive = false;
 
     public User(String username, String email, boolean isActive) {
         this.username = username;
         this.email = email;
-        this.isActive = isActive;
+        User.isActive = isActive;
     }
 
     public User() {}
