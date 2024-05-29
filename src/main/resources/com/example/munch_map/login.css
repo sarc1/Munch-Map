@@ -19,12 +19,13 @@
     -fx-fill: #34AC90;
     -fx-font-size: 40px;
     -fx-font-weight: bold;
+
 }
 
 #useremail, #password{
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-fill: #156512;
-    -fx-font-size: 20px;
+    -fx-font-size: 23px;
     -fx-font-weight: bold;
 }
 
