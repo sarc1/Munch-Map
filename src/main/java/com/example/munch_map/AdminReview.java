@@ -38,13 +38,14 @@ public class AdminReview {
     private List<Review> reviews = new ArrayList<>();
     private int currentReviewIndex = -1;
 
+    private List<Places> places = new ArrayList<>();
+    private int currentPlaceIndex = -1;
+
     private String chosenReviewStatus = "";
 
     @FXML
     Button btnDeny, btnApprove, btnNext, btnPrev;
 
-//    @FXML
-//    private Button btnDeny, btnApprove;
 
     @FXML
     public void initialize() {
@@ -52,6 +53,7 @@ public class AdminReview {
 
         cbAdminReview.getItems().addAll("Reviews (Unchecked)","Reviews (Approved)","Reviews (Deleted)","New Places (Unchecked)","New Places (Approved)","New Places (Deleted)");
 
+        treeviewReview.setShowRoot(false);
         cbAdminReview.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue != null && newValue.startsWith("Reviews")) {
                 chosenReviewStatus = newValue.replace("Reviews (", "").replace(")", "");
@@ -64,45 +66,42 @@ public class AdminReview {
                     currentReviewIndex = 0;
                 }
 
-
                 new Thread(fetchReviewsTask).start();
-
-
                 updateReviewDetails();
 
+            }else if (newValue.equals("New Places (Unchecked)")) {
+                chosenReviewStatus = "New Places (Unchecked)";
+                Task<TreeItem<String>> fetchPlacesTask = new FetchPlacesTask(false, false);
+                treeviewReview.rootProperty().bind(fetchPlacesTask.valueProperty());
+                new Thread(fetchPlacesTask).start();
+                hideButtons(true);
+                updatePlaceDetails();
+            } else if (newValue.equals("New Places (Approved)")) {
+                chosenReviewStatus = "New Places (Approved)";
+                Task<TreeItem<String>> fetchPlacesTask = new FetchPlacesTask(true, false);
+                treeviewReview.rootProperty().bind(fetchPlacesTask.valueProperty());
+                new Thread(fetchPlacesTask).start();
+                updatePlaceDetails();
+            }else if (newValue.equals("New Places (Deleted)")) {
+                chosenReviewStatus = "New Places (Deleted)";
+                Task<TreeItem<String>> fetchPlacesTask = new FetchPlacesTask(false, true); // pass true for fetchDeleted
+                treeviewReview.rootProperty().bind(fetchPlacesTask.valueProperty());
+                new Thread(fetchPlacesTask).start();
+                updatePlaceDetails();
             }
+
         });
 
-        treeviewReview.getSelectionModel().selectedItemProperty()
-                .addListener((observableValue, oldValue, newValue) -> {
-                    String selectedReview = newValue.getValue();
-
-                    if (selectedReview.startsWith("Review#")) {
-                        try (Connection connectDB = MySQLConnection.ds.getConnection()) {
-                            String getDetailsQuery = "SELECT r.review_id, p.place_name, a.username, r.rating, r.comment FROM tblReviews r"
-                                    + " JOIN tblPlace p ON r.place_id = p.place_id"
-                                    + " JOIN tblAccount a ON r.acc_id = a.acc_id"
-                                    + " WHERE r.review_id = ?";
-
-                            PreparedStatement statement = connectDB.prepareStatement(getDetailsQuery);
-                            String reviewId = selectedReview.replace("Review#", "");
-                            statement.setString(1, reviewId);
-                            ResultSet resultSet = statement.executeQuery();
-                            treeviewReview.setShowRoot(false);
-                            txtComment.setVisible(true);
-
-                            if (resultSet.next()) {
-                                lblReviewID.setText("Review ID: " + resultSet.getString("review_id"));
-                                lblPlace.setText("Place: " + resultSet.getString("place_name"));
-                                lblUsername.setText("User: " + resultSet.getString("username"));
-                                lblRating.setText("Rating: " + resultSet.getFloat("rating"));
-                                txtComment.setText(resultSet.getString("comment"));
-                            }
-                        } catch (SQLException ex) {
-                            System.err.println("Error: " + ex.getMessage());
-                        }
-                    }
-                });
+        treeviewReview.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue != null) {
+                String selectedItem = newValue.getValue();
+                if (selectedItem.startsWith("Review#")) {
+                    loadReviewDetails(selectedItem);
+                } else if (selectedItem.startsWith("Place#")) {
+                    loadPlaceDetails(selectedItem);
+                }
+            }
+        });
     }
 
     // Method to recursively expand all nodes in the TreeView
@@ -141,26 +140,27 @@ public class AdminReview {
         protected TreeItem<String> call() throws Exception {
             TreeItem<String> pseudoRoot = new TreeItem<>("Root");
 
+
             String getReviewsQuery =
                     "SELECT b.barangay_name, p.place_name, r.rating, r.comment, r.review_id, a.username " +
                             "FROM tblReviews r " +
                             "JOIN tblPlace p ON r.place_id = p.place_id " +
                             "JOIN tblBarangay b ON p.barangay_id = b.barangay_id " +
-                            "JOIN tblAccount a ON r.acc_id = a.acc_id";
-
+                            "JOIN tblAccount a ON r.acc_id = a.acc_id " +
+                            "WHERE p.isApproved = 1 ";
 
             if ("Unchecked".equals(chosenReviewStatus)) {
                 hideButtons(true);
-                getReviewsQuery += " WHERE r.isApproved = 0 AND r.isDeleted = 0";
+                getReviewsQuery += "AND r.isApproved = 0 AND r.isDeleted = 0 ";
             } else if ("Approved".equals(chosenReviewStatus)) {
                 hideButtons(false);
-                getReviewsQuery += " WHERE r.isApproved = 1";
+                getReviewsQuery += "AND r.isApproved = 1 ";
             } else if ("Deleted".equals(chosenReviewStatus)) {
-                getReviewsQuery += " WHERE r.isDeleted = 1";
+                getReviewsQuery += "AND r.isDeleted = 1 ";
                 hideButtons(false);
             }
 
-            getReviewsQuery += " ORDER BY b.barangay_name, p.place_name";
+            getReviewsQuery += "ORDER BY b.barangay_name, p.place_name ";
 
             try (Connection connectDB = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = connectDB.prepareStatement(getReviewsQuery)) {
@@ -247,6 +247,174 @@ public class AdminReview {
         }
     }
 
+    private class FetchPlacesTask extends Task<TreeItem<String>> {
+
+        private final boolean fetchApproved;
+        private final boolean fetchDeleted;
+
+        public FetchPlacesTask(boolean fetchApproved, boolean fetchDeleted) {
+            this.fetchApproved = fetchApproved;
+            this.fetchDeleted = fetchDeleted;
+        }
+
+
+        @Override
+        protected TreeItem<String> call() throws Exception {
+            TreeItem<String> pseudoRoot = new TreeItem<>("Root");
+
+            String getPlacesQuery =
+                    "SELECT b.barangay_name, p.place_name, p.place_id, a.username, p.place_about " +
+                            "FROM tblPlace p " +
+                            "JOIN tblBarangay b ON p.barangay_id = b.barangay_id " +
+                            "JOIN tblAccount a ON p.acc_id = a.acc_id ";
+
+            if (fetchApproved) {
+                hideButtons(false);
+                getPlacesQuery += "WHERE p.isApproved = 1 ";  // Only approved places
+
+            } else if (fetchDeleted) {
+                hideButtons(false);
+                getPlacesQuery += "WHERE p.isDeleted = 1 ";  // Only deleted places
+
+            } else {
+                getPlacesQuery += "WHERE p.isApproved = 0 AND p.isDeleted = 0 ";  // No additional filtering (unapproved & non-deleted)
+            }
+
+            getPlacesQuery += "ORDER BY b.barangay_name, p.place_name ";
+
+            try (Connection connectDB = MySQLConnection.ds.getConnection();
+                 PreparedStatement statement = connectDB.prepareStatement(getPlacesQuery)) {
+
+                ResultSet queryOutput = statement.executeQuery();
+                TreeItem<String> barangayItem = null;
+                TreeItem<String> placeItem = null;
+                String currentBarangay = "";
+                String currentPlace = "";
+
+                int currentBarangayCount = 0;
+                int currentPlaceCount = 0;
+
+
+                while (queryOutput.next()) {
+                    String barangayName = queryOutput.getString("barangay_name");
+                    String placeName = queryOutput.getString("place_name");
+                    String placeId = queryOutput.getString("place_id");
+                    String username = queryOutput.getString("username");
+                    String about = queryOutput.getString("place_about");
+
+                    places.add(new Places(barangayName, placeId, placeName, username, about));
+
+
+
+                    if (!barangayName.equals(currentBarangay)) {
+                        if (barangayItem != null) {
+                            barangayItem.setValue(barangayItem.getValue() + " (" + currentBarangayCount + " place(s))");
+                        }
+                        currentBarangayCount = 0;
+                        barangayItem = new TreeItem<>(barangayName);
+                        pseudoRoot.getChildren().add(barangayItem);
+                        currentBarangay = barangayName;
+                        currentPlace = "";
+                    }
+
+                    // Changing place
+                    if (!placeName.equals(currentPlace)) {
+
+                        // Update previous placeItem with place count
+                        if (placeItem != null) {
+                            placeItem.setValue(placeItem.getValue() + " (" + currentPlaceCount + " place(s))");
+                        }
+
+                        // reset place place count
+                        currentPlaceCount = 0;
+
+                        // Create new PlaceItem
+                        placeItem = new TreeItem<>(placeName);
+                        barangayItem.getChildren().add(placeItem);
+                        currentPlace = placeName;
+                    }
+
+
+                    if (placeItem != null) {
+                        String placeID = "Place#" + placeId;
+                        placeItem.getChildren().add(new TreeItem<>(placeID));
+                        currentPlaceCount++;
+                        currentBarangayCount++;
+                    }
+                }
+
+                if (placeItem != null) {
+                    placeItem.setValue(placeItem.getValue() + " (" + currentPlaceCount + " place(s))");
+                }
+
+                if (barangayItem != null) {
+                    barangayItem.setValue(barangayItem.getValue() + " (" + currentBarangayCount + " place(s))");
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                e.getCause();
+            }
+
+            expandTreeView(pseudoRoot);
+
+            return pseudoRoot;
+        }
+    }
+
+    private void loadPlaceDetails(String selectedPlace) {
+
+
+        try (Connection connectDB = MySQLConnection.ds.getConnection()) {
+            String getDetailsQuery = "SELECT p.place_id, p.place_name, a.username, p.place_about " +
+                    "FROM tblPlace p " +
+                    "JOIN tblAccount a ON p.acc_id = a.acc_id " +
+                    "WHERE p.place_id = ?";
+
+            PreparedStatement statement = connectDB.prepareStatement(getDetailsQuery);
+            String placeID = selectedPlace.replace("Place#", "");
+            statement.setString(1, placeID);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                lblReviewID.setText("Place ID: " + resultSet.getString("place_id"));
+                lblPlace.setText("Place: " + resultSet.getString("place_name"));
+                lblRating.setText("Added by: " + resultSet.getString("username"));
+                lblUsername.setText("About");  // No rating for places
+                txtComment.setVisible(true);
+                txtComment.setText(resultSet.getString("place_about")); // No comment for places
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+    }
+
+    private void loadReviewDetails(String selectedReview) {
+        try (Connection connectDB = MySQLConnection.ds.getConnection()) {
+            String getDetailsQuery = "SELECT r.review_id, p.place_name, a.username, r.rating, r.comment " +
+                    "FROM tblReviews r " +
+                    "JOIN tblPlace p ON r.place_id = p.place_id " +
+                    "JOIN tblAccount a ON r.acc_id = a.acc_id " +
+                    "WHERE r.review_id = ?";
+
+            PreparedStatement statement = connectDB.prepareStatement(getDetailsQuery);
+            String reviewId = selectedReview.replace("Review#", "");
+            statement.setString(1, reviewId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                lblReviewID.setText("Review ID: " + resultSet.getString("review_id"));
+                lblPlace.setText("Place: " + resultSet.getString("place_name"));
+                lblUsername.setText("User: " + resultSet.getString("username"));
+                lblRating.setText("Rating: " + resultSet.getFloat("rating"));
+                txtComment.setVisible(true);
+                txtComment.setText(resultSet.getString("comment"));
+            }
+        } catch (SQLException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+    }
+
     @FXML
     public void hideButtons(boolean show){
 
@@ -254,6 +422,7 @@ public class AdminReview {
         btnApprove.setVisible(show);
         btnNext.setVisible(show);
         btnPrev.setVisible(show);
+        txtComment.setVisible(show);
     }
 
     @FXML
@@ -263,6 +432,12 @@ public class AdminReview {
                 currentReviewIndex--;
             } while (currentReviewIndex >= 0 && isReviewAccessible(reviews.get(currentReviewIndex)));
             updateReviewDetails();
+        }
+        if (currentPlaceIndex > 0 && "New Places (Unchecked)".equals(chosenReviewStatus)) {
+            do {
+                currentPlaceIndex--;
+            } while (currentPlaceIndex > 0 && isPlaceAccessible(places.get(currentPlaceIndex)));
+            updatePlaceDetails();
         }
     }
 
@@ -274,6 +449,13 @@ public class AdminReview {
             } while (currentReviewIndex <= (reviews.size() - 1) && isReviewAccessible(reviews.get(currentReviewIndex)));
             updateReviewDetails();
         }
+
+        if (currentPlaceIndex < (places.size() - 1) && "New Places (Unchecked)".equals(chosenReviewStatus)) {
+            do {
+                currentPlaceIndex++;
+            } while (currentPlaceIndex <= (places.size() - 1) && isPlaceAccessible(places.get(currentPlaceIndex)));
+            updatePlaceDetails();
+        }
     }
 
     private void updateReviewDetails() {
@@ -284,9 +466,29 @@ public class AdminReview {
             lblUsername.setText("User: " + review.username);
             lblRating.setText("Rating: " + review.rating);
             txtComment.setText(review.comment);
+        } else {
+            clearDetails();
+        }
+    }
+    private void updatePlaceDetails() {
+        if (currentPlaceIndex >= 0 && currentPlaceIndex < places.size()) {
+            Places place = places.get(currentPlaceIndex);
+            lblReviewID.setText("Place ID: " + place.getPlaceId());
+            lblPlace.setText("Place: " + place.getplaceName());
+            lblUsername.setText("User: " + place.getUsername());
+            txtComment.setText(place.getAbout());
+        } else {
+            clearDetails();
         }
     }
 
+    private void clearDetails() {
+        lblReviewID.setText("");
+        lblPlace.setText("");
+        lblUsername.setText("");
+        lblRating.setText("");
+        txtComment.setText("");
+    }
     private boolean isReviewAccessible(Review review) {
         try (Connection connectDB = MySQLConnection.ds.getConnection()) {
             String checkQuery = "SELECT isApproved, isDeleted FROM tblReviews WHERE review_id = ?";
@@ -305,9 +507,19 @@ public class AdminReview {
     }
 
     public void refreshTreeView() {
-        Task<TreeItem<String>> fetchReviewsTask = new FetchReviewsTask();
-        treeviewReview.rootProperty().bind(fetchReviewsTask.valueProperty());
-        new Thread(fetchReviewsTask).start();
+        Task<TreeItem<String>> fetchTask = null;
+        String selectedItem = cbAdminReview.getSelectionModel().getSelectedItem();
+        if("Reviews (Unchecked)".equals(selectedItem) || "Reviews (Approved)".equals(selectedItem) || "Reviews (Deleted)".equals(selectedItem)) {
+            fetchTask = new FetchReviewsTask();
+        } else if ("New Places (Unchecked)".equals(selectedItem)) {
+            fetchTask = new FetchPlacesTask(false, false);
+        } else if ("New Places (Approved)".equals(selectedItem)) {
+            fetchTask = new FetchPlacesTask(true, false);
+        } else if("New Places (Deleted)".equals(selectedItem)) { // New Places (Deleted)
+            fetchTask = new FetchPlacesTask(false, true);
+        }
+        treeviewReview.rootProperty().bind(fetchTask.valueProperty());
+        new Thread(fetchTask).start();
     }
 
     @FXML
@@ -319,19 +531,58 @@ public class AdminReview {
     @FXML
     public void handleDeny() {
         String selectedItem = cbAdminReview.getSelectionModel().getSelectedItem();
-        if ("Reviews (Unchecked)".equals(selectedItem) && currentReviewIndex >= 0)  {
-            Review review = reviews.get(currentReviewIndex);
-            String updateQuery = "UPDATE tblReviews SET isDeleted = 1 WHERE review_id = ?";
+        if (currentReviewIndex >= 0) {
+            if ("Reviews (Unchecked)".equals(selectedItem)) {
+                Review review = reviews.get(currentReviewIndex);
+                String updateQuery = "UPDATE tblReviews SET isDeleted = 1 WHERE review_id = ?";
+
+                try (Connection connectDB = MySQLConnection.ds.getConnection();
+                     PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
+
+                    statement.setString(1, review.reviewID);
+                    statement.executeUpdate();
+                    reviews.remove(currentReviewIndex);
+                    currentReviewIndex = Math.max(0, currentReviewIndex - 1);
+                    updateReviewDetails();
+                    refreshTreeView();
+
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex.getMessage());
+                }
+            } else if ("New Places (Unchecked)".equals(selectedItem)) {
+                String selectedItemText = treeviewReview.getSelectionModel().getSelectedItem().getValue();
+                String placeId = selectedItemText.replace("Place#", "").split(":")[0];
+                String updateQuery = "UPDATE tblPlace SET isDeleted = 1 WHERE place_id = ?";
+
+                try (Connection connectDB = MySQLConnection.ds.getConnection();
+                     PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
+
+                    statement.setString(1, placeId);
+                    statement.executeUpdate();
+
+
+                    currentPlaceIndex = (currentPlaceIndex >= places.size()) ? places.size() - 1 : currentPlaceIndex; //Adjust currentPlaceIndex
+                    updatePlaceDetails();
+
+                    refreshTreeView();
+
+
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex.getMessage());
+                }
+            }
+        }
+        if ("New Places (Deleted)".equals(selectedItem)) {
+            String selectedItemText = treeviewReview.getSelectionModel().getSelectedItem().getValue();
+            String placeId = selectedItemText.replace("Place#", "").split(":")[0];
+            String updateQuery = "UPDATE tblPlace SET isDeleted = 1 WHERE place_id = ?";
 
             try (Connection connectDB = MySQLConnection.ds.getConnection();
                  PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
 
-                statement.setString(1, review.reviewID);
+                statement.setString(1, placeId);
                 statement.executeUpdate();
-                reviews.remove(currentReviewIndex); // remove review from list
-                currentReviewIndex = Math.max(0, currentReviewIndex - 1); // set index to next review or last review
-                updateReviewDetails();
-                //Refresh the TreeView if necessary
+
                 refreshTreeView();
 
             } catch (SQLException ex) {
@@ -343,30 +594,72 @@ public class AdminReview {
     @FXML
     public void handleApprove() {
         String selectedItem = cbAdminReview.getSelectionModel().getSelectedItem();
-        if ("Reviews (Unchecked)".equals(selectedItem) && currentReviewIndex >= 0){
-            Review review = reviews.get(currentReviewIndex);
-            String updateQuery = "UPDATE tblReviews SET isApproved = 1, comment = ? WHERE review_id = ?";
+        if (currentReviewIndex >= 0) {
+            if ("Reviews (Unchecked)".equals(selectedItem) ) {
+                Review review = reviews.get(currentReviewIndex);
+                String updateQuery = "UPDATE tblReviews SET isApproved = 1, comment = ? WHERE review_id = ?";
 
-            try (Connection connectDB = MySQLConnection.ds.getConnection();
-                 PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
+                try (Connection connectDB = MySQLConnection.ds.getConnection();
+                     PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
 
-                statement.setString(1, txtComment.getText());
-                statement.setString(2, review.reviewID);
-                statement.executeUpdate();
+                    statement.setString(1, txtComment.getText());
+                    statement.setString(2, review.reviewID);
+                    statement.executeUpdate();
 
-                reviews.remove(currentReviewIndex); // remove review from list
-                currentReviewIndex = Math.min(reviews.size() - 1, currentReviewIndex); // set index to next review or last review
-                updateReviewDetails();
+                    reviews.remove(currentReviewIndex);
+                    currentReviewIndex = Math.min(reviews.size() - 1, currentReviewIndex);
+                    updateReviewDetails();
+                    refreshTreeView();
 
-                //Refresh the TreeView if necessary
-                refreshTreeView();
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex.getMessage());
+                }
+            } else if ("New Places (Unchecked)".equals(selectedItem)) {
+                String selectedItemText = treeviewReview.getSelectionModel().getSelectedItem().getValue();
+                String placeId = selectedItemText.replace("Place#", "").split(":")[0];
+                String updateQuery = "UPDATE tblPlace SET isApproved = 1, place_about = ? WHERE place_id = ?";   // Set isApproved = 1
 
-            } catch (SQLException ex) {
-                System.err.println("Error: " + ex.getMessage());
+                try (Connection connectDB = MySQLConnection.ds.getConnection();
+                     PreparedStatement statement = connectDB.prepareStatement(updateQuery)) {
+
+                    statement.setString(1, txtComment.getText()); // Use text from txtComment as place_about
+                    statement.setString(2, placeId);
+
+                    statement.executeUpdate();
+
+
+                    places.remove(currentPlaceIndex);
+                    currentPlaceIndex = (currentPlaceIndex >= places.size()) ? places.size() - 1 : currentPlaceIndex;
+                    updatePlaceDetails();
+                    refreshTreeView();
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex.getMessage());
+                }
+
 
             }
+
         }
     }
+
+    private boolean isPlaceAccessible(Places place) {
+        try (Connection connectDB = MySQLConnection.ds.getConnection()) {
+            String checkQuery = "SELECT isApproved, isDeleted FROM tblPlace WHERE place_id = ?";
+            PreparedStatement statement = connectDB.prepareStatement(checkQuery);
+            statement.setString(1, place.getPlaceId());
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getBoolean("isApproved") || resultSet.getBoolean("isDeleted");
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+        return true; // by default, assume non-accessible
+    }
+
+
 
 }
 
