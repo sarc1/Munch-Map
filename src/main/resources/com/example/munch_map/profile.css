@@ -10,6 +10,17 @@
     -fx-font-size: 40px;
     -fx-font-weight: bold;
 }
+#displayUsername{
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+
+}
+#displayEmail{
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
 #btnReturn{
     -fx-background-color: #34AC90;
     -fx-text-fill: #FFFFFF;
