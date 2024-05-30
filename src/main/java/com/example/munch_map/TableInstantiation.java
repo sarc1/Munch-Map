@@ -43,7 +43,7 @@ public class TableInstantiation {
                     "rating DECIMAL(2,1) NOT NULL CHECK (rating >= 0.0 AND rating <= 5.0)," +
                     "comment VARCHAR(255)," +
                     "FOREIGN KEY (place_id) REFERENCES tblPlace(place_id) ON DELETE CASCADE," +
-                    "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id) ON DELETE CASCADE," +
+                    "FOREIGN KEY (acc_id) REFERENCES tblAccount(acc_id)," +
                     "isApproved TINYINT(1) NOT NULL DEFAULT 0," +
                     "isDeleted TINYINT(1) NOT NULL DEFAULT 0)";
 
