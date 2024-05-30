@@ -2,5 +2,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Dosis:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 #AnchorPaneProfile{
-
+    -fx-background-color: #DEFFE1;
+}
+#lblProfile{
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-fill: #34AC90;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+}
+#btnReturn{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+#btnEdit{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+#btnLogout{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
 }

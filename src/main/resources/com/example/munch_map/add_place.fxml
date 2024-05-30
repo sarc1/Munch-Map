@@ -37,7 +37,7 @@
          </font>
       </Text>
       <TextField fx:id="addressInput" layoutX="310.0" layoutY="357.0" prefHeight="78.0" prefWidth="307.0" />
-      <Button fx:id="btnReturn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClick" text="Back" />
+      <Button fx:id="btnReturn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="26.0" prefWidth="62.0" text="Back" />
     </children>
 
 </AnchorPane>

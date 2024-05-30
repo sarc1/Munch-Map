@@ -1,37 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Dosis:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Dosis:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
-
-#AddPlacePage{
+#anchorPaneEdit{
     -fx-background-color: #DEFFE1;
 }
-#btnInsert{
-    -fx-background-color: #34AC90;
-    -fx-text-fill: #FFFFFF;
-    -fx-background-radius: 20px;
+
+#lblUsername{
+    -fx-color: #34AC90;
     -fx-font-family: "Baloo 2", sans-serif;
-    -fx-font-size: 25px;
     -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+#lblPassword{
+    -fx-color: #34AC90;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
 }
 
-#caption{
+#lblEmail{
+    -fx-color: #34AC90;
     -fx-font-family: "Baloo 2", sans-serif;
-    -fx-fill: #34AC90;
-    -fx-font-size: 40px;
     -fx-font-weight: bold;
+    -fx-font-size: 15px;
 }
-#barangay, #name, #type, #address{
-    -fx-font-family: "Plus Jakarta Sans", sans-serif;
-    -fx-fill: #156512;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-#barangayInput, #nameInput, #typeInput, #addressInput{
+#txtfieldUsername{
     -fx-background-color: #A8DFAD;
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
-    -fx-background-radius: 25px;
+    -fx-background-radius: 15px;
     -fx-font-weight: bold;
 }
-#btnReturn{
+#txtfieldPassword{
+    -fx-background-color: #A8DFAD;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+}
+#txtfieldEmail{
+    -fx-background-color: #A8DFAD;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-background-radius: 15px;
+    -fx-font-weight: bold;
+}
+#btnSave{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+#btnBack{
     -fx-background-color: #34AC90;
     -fx-text-fill: #FFFFFF;
     -fx-background-radius: 18px;

@@ -89,5 +89,19 @@ public class Barangay {
             e.printStackTrace();
         }
     }
+
+    public void onProfileButtonClick(ActionEvent actionEvent) {
+        try {
+            AnchorPane p = barangayPage;
+            Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profile.fxml")));
+            p.getScene().getStylesheets().clear();
+            p.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("profile.css")).toExternalForm());
+            p.getChildren().clear();
+            p.getChildren().add(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
