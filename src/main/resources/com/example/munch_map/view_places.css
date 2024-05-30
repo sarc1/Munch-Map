@@ -35,7 +35,7 @@
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
-    -fx-padding: 5;
+    -fx-padding: 10;
 }
 
 
@@ -100,6 +100,15 @@
     -fx-pref-width: 100px;
     -fx-pref-height: 100px;
     -fx-layout-orientation: center;
+}
+
+#btnBackPlaces{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
 }
 #btnReviews{
     -fx-background-color: white;

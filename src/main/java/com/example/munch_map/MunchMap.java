@@ -55,14 +55,14 @@ public class MunchMap {
         Parent loading = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("transition.fxml")));
         loading.getStylesheets().add(Objects.requireNonNull(getClass().getResource("transition.css")).toExternalForm());
         p.getChildren().add(loading);
-
-//        Image image = new Image();
+//        Image image = new Image(getClass().getResource("/com/example/munch_map/src/images/munch.gif").toExternalForm());
 //        ImageView imageView = new ImageView(image);
 //        StackPane stackPane = new StackPane();
 //        stackPane.getChildren().add(imageView);
 //        p.getChildren().add(stackPane);
-
-
+//        imageView.setPreserveRatio(true);
+//        imageView.setFitWidth(550);
+//        imageView.setFitHeight(800);
 
         new Thread(() -> {
             try {

@@ -5,7 +5,7 @@
 
 <AnchorPane fx:id="anchorpaneAdminReview" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.AdminReview">
     <children>
-        <AnchorPane fx:id="scrollDetails" layoutX="277.0" layoutY="66.0" prefHeight="255.0" prefWidth="500.0">
+        <AnchorPane fx:id="scrollDetails" layoutX="277.0" layoutY="84.0" prefHeight="255.0" prefWidth="500.0">
          <children>
             <Label fx:id="lblReviewID" layoutX="14.0" layoutY="14.0" text="" />
             <Label fx:id="lblPlace" layoutX="14.0" layoutY="42.0" text="" />
@@ -16,11 +16,11 @@
       <Button fx:id="btnPrev" layoutX="664.0" layoutY="30.0" mnemonicParsing="false" onAction="#handlePrev" text="Prev" visible="false" />
       <Button fx:id="btnNext" layoutX="725.0" layoutY="30.0" mnemonicParsing="false" onAction="#handleNext" text="Next" visible="false" />
 
-      <Button fx:id="btnDeny" layoutX="277.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleDeny" prefHeight="26.0" prefWidth="240.0" text="Deny" visible="false" />
-      <Button fx:id="btnApprove" layoutX="537.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleApprove" prefHeight="26.0" prefWidth="240.0" text="Approve" visible="false" />
+      <Button fx:id="btnDeny" layoutX="277.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleDeny" prefHeight="26.0" prefWidth="240.0" text="Deny" visible="false" />
+      <Button fx:id="btnApprove" layoutX="537.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleApprove" prefHeight="26.0" prefWidth="240.0" text="Approve" visible="false" />
       <ChoiceBox fx:id="cbAdminReview" layoutX="24.0" layoutY="30.0" prefHeight="26.0" prefWidth="222.0" />
       <TreeView fx:id="treeviewReview" layoutX="24.0" layoutY="66.0" prefHeight="468.0" prefWidth="222.0" />
-      <Button fx:id="btnRefresh" layoutX="277.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
-      <Button fx:id="btnReturn" layoutX="348.0" layoutY="511.0" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="26.0" prefWidth="56.0" text="Back" />
+      <Button fx:id="btnRefresh" layoutX="277.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleRefresh" prefHeight="26.0" prefWidth="75.0" text="Refresh" />
+      <Button fx:id="btnReturn" layoutX="363.0" layoutY="511.0" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="26.0" prefWidth="67.0" text="Back" />
     </children>
 </AnchorPane>

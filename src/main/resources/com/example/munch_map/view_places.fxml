@@ -3,10 +3,14 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="viewPlacesAnchorPane" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.ViewPlaces">
     <children>
-      <Button fx:id="btnBackPlaces" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPlaceOnClick" text="&lt;" />
+      <Button fx:id="btnBackPlaces" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#backPlaceOnClick" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
         <Label fx:id="barangayNameLabel" layoutX="226.0" layoutY="47.0" prefHeight="18.0" prefWidth="193.0" textFill="#000000" />
         <ListView fx:id="placeListView" layoutX="27.0" layoutY="108.0" prefHeight="418.0" prefWidth="221.0" />
         <HBox fx:id="hboxPlaceDetails" layoutX="271.0" layoutY="375.0" prefHeight="138.0" prefWidth="508.0">
