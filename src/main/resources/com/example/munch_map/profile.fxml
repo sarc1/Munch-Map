@@ -13,8 +13,8 @@
       </Label>
       <Label fx:id="displayUsername" layoutX="71.0" layoutY="185.0" prefHeight="27.0" prefWidth="220.0" />
       <Label fx:id="displayEmail" layoutX="71.0" layoutY="232.0" prefHeight="27.0" prefWidth="220.0" />
-      <Button fx:id="btnEdit" layoutX="71.0" layoutY="275.0" mnemonicParsing="false" onAction="#onEditProfileButtonClick" prefHeight="26.0" prefWidth="179.0" text="Edit Profile Information" />
-      <Button fx:id="btnLogout" layoutX="652.0" layoutY="462.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="121.0" text="Logout" />
-      <Button fx:id="btnReturn" layoutX="45.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="Back" />
+      <Button fx:id="btnEdit" layoutX="71.0" layoutY="275.0" mnemonicParsing="false" onAction="#onEditProfileButtonClick" prefHeight="26.0" prefWidth="214.0" text="Edit Profile Information" />
+      <Button fx:id="btnLogout" layoutX="652.0" layoutY="462.0" mnemonicParsing="false" onAction="#onLogoutButtonClick" prefHeight="26.0" prefWidth="121.0" text="Logout" />
+      <Button fx:id="btnReturn" layoutX="45.0" layoutY="38.0" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="26.0" prefWidth="78.0" text="Back" />
    </children>
 </AnchorPane>

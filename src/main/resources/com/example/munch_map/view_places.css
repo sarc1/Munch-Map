@@ -127,6 +127,7 @@
 }
 
 .review-box{
+    -fx-background-color: #34AC90;
     -fx-padding: 10px;
     -fx-border-color: lightgray;
     -fx-border-width: 1px;

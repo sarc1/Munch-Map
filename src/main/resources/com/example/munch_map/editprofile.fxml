@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.Editprofile">
+<AnchorPane fx:id="anchorPaneEdit" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.Editprofile">
    <children>
       <Label fx:id="lblUsername" layoutX="53.0" layoutY="112.0" prefHeight="30.0" prefWidth="98.0" text="Username">
          <font>
@@ -17,13 +17,13 @@
          </font>
       </Label>
       <TextField fx:id="txtfieldEmail" layoutX="53.0" layoutY="250.0" prefHeight="26.0" prefWidth="246.0" />
-      <Button layoutX="53.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Save" />
-      <Label layoutX="450.0" layoutY="119.0" prefHeight="30.0" prefWidth="173.0" text="Password">
+      <Button fx:id="btnSave" layoutX="53.0" layoutY="346.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Save" />
+      <Label fx:id="lblPassword" layoutX="450.0" layoutY="119.0" prefHeight="30.0" prefWidth="173.0" text="Password">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="450.0" layoutY="153.0" prefHeight="26.0" prefWidth="256.0" />
-      <Button layoutX="39.0" layoutY="38.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" text="Back" />
+      <TextField fx:id="txtfieldPassword" layoutX="450.0" layoutY="153.0" prefHeight="26.0" prefWidth="256.0" />
+      <Button fx:id="btnBack" layoutX="39.0" layoutY="38.0" mnemonicParsing="false" onAction="#onReturnButtonClick" prefHeight="26.0" prefWidth="75.0" text="Back" />
    </children>
 </AnchorPane>

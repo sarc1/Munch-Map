@@ -6,6 +6,7 @@
 }
 #treeviewReview{
     -fx-background-color: #4EE5C2;
+    -fx-background-radius: 10;
 }
 .tree-cell{
     -fx-background-color: #4EE5C2;
@@ -27,6 +28,7 @@
     -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
+    -fx-background-radius: 15;
 }
 #btnNext{
     -fx-background-color: #34AC90;
