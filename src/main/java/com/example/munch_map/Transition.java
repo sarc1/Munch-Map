@@ -5,4 +5,5 @@ import javafx.scene.layout.AnchorPane;
 public class Transition {
 
     public AnchorPane transitionPage;
+
 }

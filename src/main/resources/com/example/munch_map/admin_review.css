@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&family=Dosis:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Dosis:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+#anchorpaneAdminReview{
+    -fx-background-color: #DEFFE1;
+}
+#treeviewReview{
+    -fx-background-color: #4EE5C2;
+}
+.tree-cell{
+    -fx-background-color: #4EE5C2;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+#btnPrev{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+
+}
+#scrollDetails{
+    -fx-background-color: #4EE5C2;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+}
+#btnNext{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+#cbAdminReview{
+    -fx-background-radius: 15;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-weight: bold;
+    -fx-background-color: #34AC90;
+}
+.list-cell{
+    -fx-background-color: #34AC90;
+}
+
+#scrollReviews{
+
+}
+#btnRefresh{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+#btnReturn{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+#btnDeny{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
+#btnApprove{
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10;
+    -fx-font-weight: bold;
+}
