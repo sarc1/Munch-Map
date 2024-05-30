@@ -18,23 +18,24 @@
 }
 
 #placeListView{
-    -fx-background-color: #00C5E0;
+    -fx-background-color: #4EE5C2;
     -fx-background-radius: 10;
     -fx-padding: 5;
 
 }
 .list-cell{
-    -fx-background-color: #00C5E0;
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-background-color: #4EE5C2;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
     -fx-background-radius: 15;
+    -fx-padding: 5;
 }
 #showScroll{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-weight: bold;
     -fx-font-size: 15px;
-    -fx-padding: 5;
+    -fx-padding: 10;
 }
 
 
@@ -44,24 +45,24 @@
 }
 
 #placeName{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 #placeRating{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 #placeType{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-color: #A7A7A7;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
 #placeStatus{
-    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-family: "Plus Jakarta Sans", sans-serif;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
@@ -73,7 +74,10 @@
 
 }
 #btnDetails{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
     -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
@@ -84,7 +88,11 @@
     -fx-layout-orientation: center;
 }
 #btnMenu{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
     -fx-background-radius: 10;
@@ -93,8 +101,21 @@
     -fx-pref-height: 100px;
     -fx-layout-orientation: center;
 }
+
+#btnBackPlaces{
+    -fx-background-color: #34AC90;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-radius: 18px;
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
 #btnReviews{
-    -fx-background-color: #FFFFFF;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: 12;
+    -fx-text-fill: black;
+    -fx-corner-color: #000000;
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-font-size: 15px;
     -fx-background-radius: 10;
