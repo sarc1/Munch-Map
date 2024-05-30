@@ -2,7 +2,6 @@ package com.example.munch_map;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -41,6 +40,11 @@ public class Profile {
     }
     public void onLogoutButtonClick() {
         try {
+            if(Login.activeAdmin.isActive()) {
+                Login.activeAdmin = null;
+            } else {
+                Login.activeUser = null;
+            }
             AnchorPane p = AnchorPaneProfile;
             Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("login.fxml")));
             p.getScene().getStylesheets().clear();
