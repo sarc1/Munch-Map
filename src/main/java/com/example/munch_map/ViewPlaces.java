@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -14,6 +15,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,12 +43,18 @@ public class ViewPlaces {
     public Button btnBackPlaces;
 
     private String selectedPlaceName;
+    @FXML
+    public WebView webView;
+
+    private WebEngine webEngine;
 
 
     public void initialize() {
         showScroll.setVisible(false);
         barangayNameLabel.setText(Barangay.selectedBarangay);
         places = FXCollections.observableArrayList();
+
+        webEngine = webView.getEngine();
 
         Task<ObservableList<String>> fetchPlacesTask = new FetchPlacesTask();
         placeListView.itemsProperty().bind(fetchPlacesTask.valueProperty());
@@ -54,10 +63,34 @@ public class ViewPlaces {
             if (newValue != null) {
                 selectedPlaceName = newValue;
                 updatePlaceDetails(newValue);
+                loadWebPage(newValue);
             }
         });
 
         new Thread(fetchPlacesTask).start();
+    }
+    private void loadWebPage(String placeName) {
+        String url = getUrlForPlace(placeName);
+        webEngine.load(url);
+    }
+    private String getUrlForPlace(String placeName) {
+        if (placeName.equalsIgnoreCase("Labangon")) {
+            return "https://www.google.com/maps/place/Labangon,+Cebu+City,+6000+Cebu/@10.3002573,123.8743257,16z/data=!3m1!4b1!4m6!3m5!1s0x33a99ea9f188d865:0x31ab47369f9dc75b!8m2!3d10.2989677!4d123.8813181!16s%2Fg%2F1vntgfdf?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Tisa")) {
+            return "https://www.google.com/maps/place/Barangay+Tisa,+Cebu+City,+6000+Cebu/@10.3055611,123.8472244,15z/data=!3m1!4b1!4m6!3m5!1s0x33a99ea146df6987:0x8da9f7a3a4249dc9!8m2!3d10.301553!4d123.870527!16s%2Fg%2F1tnspg8g?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Guadalupe")) {
+            return "https://www.google.com/maps/place/Guadalupe,+Cebu+City,+6000+Cebu/@10.3213785,123.8628325,15z/data=!3m1!4b1!4m6!3m5!1s0x33a99ecedffd4d93:0x6c00a0cf0efb2913!8m2!3d10.3156173!4d123.8854377!16s%2Fg%2F1thxyb4r?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Duljo")) {
+            return "https://www.google.com/maps/place/Duljo,+Cebu+City,+6000+Cebu/@10.2925942,123.8813515,17z/data=!3m1!4b1!4m6!3m5!1s0x33a99c07177c46b5:0x3989caca21d80758!8m2!3d10.292778!4d123.8843799!16s%2Fg%2F1t_wlwz8?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Mambaling")) {
+            return "https://www.google.com/maps/place/Mambaling,+Cebu+City,+6000+Cebu/@10.2899455,123.8755209,16z/data=!3m1!4b1!4m6!3m5!1s0x33a99c060465097d:0xab08b428c97c343d!8m2!3d10.288614!4d123.8788002!16s%2Fg%2F11gbfb5c88?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Punta Princesa")) {
+            return "https://www.google.com/maps/place/Punta+Princesa,+Cebu+City,+6000+Cebu/@10.298341,123.8632225,16z/data=!3m1!4b1!4m6!3m5!1s0x33a99c1f2d85f5fb:0xc0d965f44d5114d1!8m2!3d10.294754!4d123.8676399!16s%2Fg%2F11gzkhr05?entry=ttu";
+        } else if (placeName.equalsIgnoreCase("Capitol Site")) {
+            return "https://www.google.com/maps/place/Capitol+Site,+Cebu+City,+6000+Cebu/@10.3147989,123.8859058,16z/data=!3m1!4b1!4m6!3m5!1s0x33a9994bd5cc124d:0x9ea79f31faf2414a!8m2!3d10.3143431!4d123.8906566!16s%2Fg%2F1tfxvk4f?entry=ttu";
+        } else {
+            return "https://www.google.com/maps/place/Cebu+City,+6000+Cebu/@10.3787539,123.7637215,12z/data=!3m1!4b1!4m6!3m5!1s0x33a999258dcd2dfd:0x4c34030cdbd33507!8m2!3d10.3156992!4d123.8854366!16zL20vMDFwX2x5?entry=ttu"; // Default URL for unknown places
+        }
     }
 
     private void updatePlaceDetails(String selectedPlaceName) {
