@@ -1,12 +1,30 @@
 package com.example.munch_map;
 
 public class Places {
-    public class Place {
-        String placeID;
-        String placeName;
-        String username; // Added username
-        String type;
-        String about;
-        // Add a new constructor and getters
+
+
+    String placeID;
+    String placeName;
+    String username; // Added username
+    String type;
+    String about;
+    String barangay_name;
+
+    // Add a new constructor and getters
+
+    public Places(String barangay_name, String placeID, String placeName, String username, String about) {
+        this.placeID = placeID;
+        this.placeName = placeName;
+        this.username = username;
+        this.about = about;
+        this.barangay_name = barangay_name;
     }
+    // You can get the current details
+    public String getPlaceId() { return placeID; }
+    public String getplaceName() { return placeName; }
+    // Additional info
+    public String getUsername() { return username; }
+    public String getAbout() { return about; }
+    public String getType() { return type; }
+    public String getBarangay_name() { return barangay_name; }
 }
