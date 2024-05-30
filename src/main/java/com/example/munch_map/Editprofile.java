@@ -77,7 +77,6 @@ public class Editprofile {
                     ResultSet list = checker.executeQuery();
 
                     if(list.next()){
-                        // TODO: Implement Error Message
                         throw new SQLException("Username or Email Already Exists");
                     } else {
                         if (Login.activeUser != null) {
