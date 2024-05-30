@@ -47,8 +47,12 @@ public class Login {
                         while (list.next()) {
                             if (list.getBoolean("admin_status")) {
                                 activeAdmin = new Admin(list.getString("username"), list.getString("email"), true);
+                                // Initialize UserSession for admin
+                                User.initializeUserSession(activeAdmin);
                             } else {
                                 activeUser = new User(list.getString("username"), list.getString("email"), true);
+                                // Initialize UserSession for user
+                                User.initializeUserSession(activeUser);
                             }
                         }
                     }
