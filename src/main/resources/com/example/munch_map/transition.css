@@ -4,10 +4,16 @@
     -fx-background-color: #DEFFE1;
 }
 
-#phrase, #title {
+#phrase {
     -fx-font-family: "Baloo 2", sans-serif;
     -fx-fill: #34AC90;
     -fx-font-size: 40px;
     -fx-font-weight: bold;
+}
 
+#title {
+    -fx-font-family: "Baloo 2", sans-serif;
+    -fx-fill: #34AC90;
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
 }
