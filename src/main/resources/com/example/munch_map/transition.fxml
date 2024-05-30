@@ -5,7 +5,8 @@
 
 <AnchorPane fx:id="transitionPage" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.munch_map.Transition">
    <children>
-      <Label fx:id="phrase" alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="170.0" text="Hey, welcome to " textAlignment="CENTER" />
-      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="261.0" layoutY="219.0" text="MunchMap." textAlignment="CENTER" />
+      <Label fx:id="phrase" alignment="CENTER" contentDisplay="CENTER" layoutX="256.0" layoutY="107.0" text="Hey, welcome to " textAlignment="CENTER" />
+      <Label fx:id="title" alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="159.0" text="MunchMap." textAlignment="CENTER" />
+      <ProgressBar fx:id="progressBar" layoutX="310.0" layoutY="266.0" prefHeight="18.0" prefWidth="179.0" progress="0.0" />
    </children>
 </AnchorPane>

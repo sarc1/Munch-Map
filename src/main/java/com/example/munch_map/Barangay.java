@@ -83,7 +83,6 @@ public class Barangay {
                 p.getChildren().clear();
                 p.getChildren().add(scene);
                 btnAdmin.setVisible(true);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
