@@ -29,6 +29,7 @@ public class Login {
     AnchorPane LoginPage;
     @FXML
     Text errorText;
+
     static User activeUser;
     static Admin activeAdmin;
 

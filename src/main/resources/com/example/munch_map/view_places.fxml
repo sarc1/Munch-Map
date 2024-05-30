@@ -64,7 +64,7 @@
             </children></HBox>
         <AnchorPane fx:id="showAnchor" layoutX="271.0" layoutY="108.0" prefHeight="255.0" prefWidth="464.0">
          <children>
-            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="468.0" />
+            <ScrollPane fx:id="showScroll" prefHeight="255.0" prefWidth="508.0" />
          </children></AnchorPane>
       <Label fx:id="barangay" layoutX="42.0" layoutY="48.0" text="Barangay" />
     </children>
