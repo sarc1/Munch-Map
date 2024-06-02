@@ -51,6 +51,7 @@ public class ViewPlaces {
         placeListView.itemsProperty().bind(fetchPlacesTask.valueProperty());
 
         placeListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            btnMenu.setVisible(false);
             if (newValue != null) {
                 selectedPlaceName = newValue;
                 updatePlaceDetails(newValue);
@@ -146,14 +147,22 @@ public class ViewPlaces {
             }
     }
 
-    public void menuOnClick(ActionEvent actionEvent) {
-    }
-
     public void reviewsOnClick(ActionEvent actionEvent) {
         if (selectedPlaceName != null) {
             Task<ObservableList<Review>> fetchReviewsTask = new FetchReviewsTask(selectedPlaceName);
             fetchReviewsTask.setOnSucceeded(e -> displayReviews(fetchReviewsTask.getValue()));
             new Thread(fetchReviewsTask).start();
+        }
+    }
+
+    public void addOnClick(ActionEvent actionEvent) {
+        try {
+            Parent addPage = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("add_place.fxml")));
+            viewPlacesAnchorPane.getScene().getStylesheets().clear();
+            viewPlacesAnchorPane.getScene().getStylesheets().add(Objects.requireNonNull(getClass().getResource("addplace.css")).toExternalForm());
+            viewPlacesAnchorPane.getChildren().add(addPage);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

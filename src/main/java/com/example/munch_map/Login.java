@@ -47,9 +47,9 @@ public class Login {
                     try (ResultSet list = stmt.executeQuery()) {
                         while (list.next()) {
                             if (list.getBoolean("admin_status")) {
-                                activeAdmin = new Admin(list.getString("username"), list.getString("email"), true);
+                                activeAdmin = new Admin(list.getInt("acc_id"), list.getString("username"), list.getString("email"), true);
                             } else {
-                                activeUser = new User(list.getString("username"), list.getString("email"), true);
+                                activeUser = new User(list.getInt("acc_id"), list.getString("username"), list.getString("email"), true);
                             }
                         }
                     }

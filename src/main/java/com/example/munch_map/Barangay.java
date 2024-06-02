@@ -21,6 +21,7 @@ import java.util.Objects;
 public class Barangay {
     public AnchorPane barangayPage;
     public ComboBox<BarangayItem> barangayComboBox;
+    public static BarangayItem selected;
     public static String selectedBarangay;
     public Button btnAdmin;
 
@@ -39,7 +40,7 @@ public class Barangay {
                     ResultSet list = statement.executeQuery(query);
 
                     while(list.next()) {
-                        BarangayItem barangayItem = new BarangayItem(list.getString("barangay_name"));
+                        BarangayItem barangayItem = new BarangayItem(list.getInt("barangay_id"), list.getString("barangay_name"));
                         barangays.add(barangayItem);
                     }
 
@@ -60,6 +61,7 @@ public class Barangay {
             public void handle(ActionEvent actionEvent) {
                 try {
                     selectedBarangay = barangayComboBox.getSelectionModel().getSelectedItem().getName();
+                    selected = barangayComboBox.getSelectionModel().getSelectedItem();
                     AnchorPane p = barangayPage;
                     Parent scene = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("view_places.fxml")));
                     p.getScene().getStylesheets().clear();

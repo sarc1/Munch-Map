@@ -16,6 +16,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
+import static com.example.munch_map.Login.activeAdmin;
+import static com.example.munch_map.Login.activeUser;
+
 public class AddPlace {
 
     @FXML
@@ -36,7 +39,10 @@ public class AddPlace {
     @FXML
     private Button btnAdd;
 
-
+    @FXML
+    public void initialize() {
+        barangayInput.setText(Barangay.selected.getName());
+    }
     @FXML
     private void onAddButtonClick() {
         Task<Void> task = new Task<>() {
@@ -44,7 +50,7 @@ public class AddPlace {
             protected Void call() {
                 try (Connection c = MySQLConnection.ds.getConnection();
                      PreparedStatement statement = c.prepareStatement(
-                             "INSERT INTO tblPlace (barangay_id, place_name, place_type, place_address) VALUES (?, ?, ?, ?)"
+                             "INSERT INTO tblPlace (acc_id, barangay_id, place_name, place_type, place_address, place_landmark, place_about, isApproved, isDeleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
                      )) {
 
                     PreparedStatement checker = c.prepareStatement("SELECT * FROM tblPlace WHERE place_name = ?");
@@ -54,13 +60,22 @@ public class AddPlace {
                     ResultSet list = checker.executeQuery();
 
                     if(list.next()) {
-                        // TOD0: Implement Error Message
                         System.out.println("Restaurant already exists!");
                     } else {
-                        statement.setString(1, barangayInput.getText());
-                        statement.setString(2, nameInput.getText());
-                        statement.setString(3, typeInput.getText());
-                        statement.setString(4, addressInput.getText());
+                        if (User.isActive) {
+                            statement.setInt(1, activeUser.getId());
+                        } else if (Admin.isActive) {
+                            statement.setInt(1, activeAdmin.getId());
+                        }
+                        statement.setInt(2, Barangay.selected.getId());
+                        statement.setString(3, nameInput.getText());
+                        statement.setString(4, typeInput.getText());
+                        statement.setString(5, addressInput.getText());
+                        statement.setString(6, "N/A");
+                        statement.setString(7, "N/A");
+                        statement.setInt(8, 0);
+                        statement.setInt(9, 0);
+
                         statement.executeUpdate();
                     }
                 } catch (SQLException e) {

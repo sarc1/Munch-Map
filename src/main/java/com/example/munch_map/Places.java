@@ -10,8 +10,6 @@ public class Places {
     String about;
     String barangay_name;
 
-    // Add a new constructor and getters
-
     public Places(String barangay_name, String placeID, String placeName, String username, String about) {
         this.placeID = placeID;
         this.placeName = placeName;
@@ -19,10 +17,9 @@ public class Places {
         this.about = about;
         this.barangay_name = barangay_name;
     }
-    // You can get the current details
+
     public String getPlaceId() { return placeID; }
     public String getplaceName() { return placeName; }
-    // Additional info
     public String getUsername() { return username; }
     public String getAbout() { return about; }
     public String getType() { return type; }

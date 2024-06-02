@@ -48,7 +48,7 @@
                      <VBox.margin>
                         <Insets bottom="5.0" top="8.0" />
                      </VBox.margin></Button>
-                        <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#menuOnClick" text="Menu">
+                        <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#addOnClick" text="Add Place">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin></Button>

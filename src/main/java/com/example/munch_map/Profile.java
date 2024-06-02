@@ -1,5 +1,6 @@
 package com.example.munch_map;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -11,9 +12,18 @@ import java.util.Objects;
 public class Profile {
 
     public AnchorPane AnchorPaneProfile;
-    public Label lblProfile;
+    public Label lblProfile, displayUsername, displayEmail;
 
-
+    @FXML
+    public void initialize() {
+        if (Login.activeUser != null) {
+            displayUsername.setText(Login.activeUser.getUsername());
+            displayEmail.setText(Login.activeUser.getEmail());
+        } else {
+            displayUsername.setText(Login.activeAdmin.getUsername());
+            displayEmail.setText(Login.activeAdmin.getEmail());
+        }
+    }
     public void onEditProfileButtonClick() {
         try {
             AnchorPane p = AnchorPaneProfile;

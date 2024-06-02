@@ -2,17 +2,23 @@ package com.example.munch_map;
 
 public class User {
     // For the Purpose of Logging Usernames and Active Emails
+    private int id;
     private String username;
     private String email;
     public static boolean isActive = false;
 
-    public User(String username, String email, boolean isActive) {
+    public User(int id, String username, String email, boolean isActive) {
+        this.id = id;
         this.username = username;
         this.email = email;
         User.isActive = isActive;
     }
 
     public User() {}
+
+    public int getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
